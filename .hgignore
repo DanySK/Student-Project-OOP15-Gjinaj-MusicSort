@@ -1,1 +1,3 @@
-syntax: globe*/bin**.class
+syntax: glob
+*/bin*
+*.class*
