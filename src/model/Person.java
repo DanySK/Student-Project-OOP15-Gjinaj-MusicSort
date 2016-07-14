@@ -4,22 +4,23 @@ public abstract class Person {
 	protected  String name;
     protected String surname;
     protected String email;
+    private final String cf;
     
     public String getFullName(){return name+" "+surname;}
     
-    private final int id;
-    public Person(final String name, final int id) { super();
+    
+    public Person(final String name, final String cf) { super();
     this.name = name;
-    this.id = id; }
+    this.cf = cf; }
     public String getName (){
     	return name;
     }
-    public int getId () { 
-    	return id;
+    public String getId () { 
+    	return cf;
     }
     
     public String toString (){
-    return "Person [name=" + name + ", id=" + id + "]";
+    return "Person [name=" + name + ", id=" + cf + "]";
     }
 	public String getSurname() {
 		return surname;
