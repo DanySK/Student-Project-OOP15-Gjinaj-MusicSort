@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.ErrorManager;
 
 public class Album {
 	
@@ -83,6 +84,15 @@ public class Album {
 	public void addSong(Song song) {
 		if(!this.AlbumSongs.containsKey(song.getId())){
 			this.AlbumSongs.put(song.getId(), song);
+		}
+	}
+	
+	public void removeSong(Song song) {
+		if(this.AlbumSongs.containsKey(song.getId())){
+			this.AlbumSongs.remove(song.getId());
+		}
+		else{
+			throw new IllegalArgumentException("No Song Found");
 		}
 		
 	}

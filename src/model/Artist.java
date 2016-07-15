@@ -21,6 +21,56 @@ public class Artist extends Person {
 		this.star=DEFAULTSTARS;
 		// TODO Auto-generated constructor stub
 	}
+
+
+	public Song getBestSong() {
+		return bestSong;
+	}
+
+
+	public void setBestSong(Song bestSong) {
+		this.bestSong = bestSong;
+	}
+
+
+	public List<Album> getArtistSong() {
+		return artistSong;
+	}
+
+
+	public void setArtistSong(List<Album> artistSong) {
+		this.artistSong = artistSong;
+	}
+
+
+	public String getGenre() {
+		return genre;
+	}
+
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
+
+	public Integer getListenedCount() {
+		return listenedCount;
+	}
+
+
+	public void setListenedCount(Integer listenedCount) {
+		this.listenedCount = listenedCount;
+	}
+
+
+	public Integer getStar() {
+		return star;
+	}
+
+
+	public void setStar(Integer star) {
+		this.star = star;
+	}
 	
 	
 	
