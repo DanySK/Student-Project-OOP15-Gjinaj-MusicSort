@@ -4,6 +4,7 @@ public abstract class Person {
 	protected  String name;
     protected String surname;
     protected String email;
+    protected String tmp;
     private final String cf;
     
     public String getFullName(){return name+" "+surname;}
