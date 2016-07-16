@@ -9,12 +9,12 @@ import java.util.logging.ErrorManager;
 public class Album {
 	
 	private static String DEFAULT = "VOID";
-	
+	private Integer id;
 	private String title;
 	private String genre;
 	private Integer pubblicatedYear;
 	private List <Artist> Artists; 
-	private Map< Integer, Song> AlbumSongs;
+	private List< Song> AlbumSongs;
 	
 	public Album() {
 		// TODO Auto-generated constructor stub
@@ -22,10 +22,10 @@ public class Album {
 		this.title=DEFAULT;
 		this.genre=DEFAULT;
 		this.Artists= new ArrayList<>();
-		this.AlbumSongs= new HashMap<>();
+		this.AlbumSongs= new ArrayList<>();
 	}
 	
-	public Album(List<Artist> artist, Map<Integer, Song> albumSong) {
+	public Album(List<Artist> artist, List< Song> albumSong) {
 		// TODO Auto-generated constructor stub
 		this.Artists= artist;
 		this.AlbumSongs= albumSong;
@@ -73,23 +73,26 @@ public class Album {
 		Artists = artists;
 	}
 
-	public Map<Integer, Song> getAlbumSongs() {
+	public List< Song> getAlbumSongs() {
 		return AlbumSongs;
 	}
 
-	public void setAlbumSongs(Map<Integer, Song> albumSongs) {
+	public void setAlbumSongs(List< Song> albumSongs) {
 		AlbumSongs = albumSongs;
 	}
 	
 	public void addSong(Song song) {
-		if(!this.AlbumSongs.containsKey(song.getId())){
-			this.AlbumSongs.put(song.getId(), song);
+		if(!this.AlbumSongs.contains(song)){
+			this.AlbumSongs.add(song);
+		}
+		else{
+			throw new IllegalArgumentException("Song Exists Yet");
 		}
 	}
 	
 	public void removeSong(Song song) {
-		if(this.AlbumSongs.containsKey(song.getId())){
-			this.AlbumSongs.remove(song.getId());
+		if(this.AlbumSongs.contains(song)){
+			AlbumSongs.remove(song);
 		}
 		else{
 			throw new IllegalArgumentException("No Song Found");
