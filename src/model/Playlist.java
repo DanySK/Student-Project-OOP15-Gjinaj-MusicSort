@@ -40,10 +40,10 @@ public class Playlist {
 		return songsList;
 	}
 
-
-	public void setSongsList(List<Song> songsList) {
-		this.songsList = songsList;
-	}
+//
+//	public void setSongsList(List<Song> songsList) {
+//		this.songsList = songsList;
+//	}
 
 
 	public String getPalylistTitle() {
