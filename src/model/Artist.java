@@ -8,19 +8,27 @@ public class Artist extends Person {
 	private static Integer DEFAULLISTENDCOUNT = 0;
 	private static String DEFAULTNAME = "VOID";
 	private Song bestSong;
-	private List<Album> artistSong;
+	private List<Song> artistAlbum;
 	private String genre ;
 	private Integer listenedCount;
 	private Integer star;
 	
 	 
-	public Artist(String name, String id, String genre) {
-		super(DEFAULTNAME, id);
+	public Artist(String name, String cf, String genre) {
+		super(DEFAULTNAME, cf);
 		this.genre=genre;
 		this.listenedCount=DEFAULLISTENDCOUNT;
 		this.star=DEFAULTSTARS;
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Artist(String Name, String cf, List<Song> artistAlbum) {
+		// TODO Auto-generated constructor stub
+		super(Name, cf);
+		this.artistAlbum=artistAlbum;
+	}
+	
+	
 
 
 	public Song getBestSong() {
@@ -33,13 +41,13 @@ public class Artist extends Person {
 	}
 
 
-	public List<Album> getArtistSong() {
-		return artistSong;
+	public List<Song> getArtistSong() {
+		return artistAlbum;
 	}
 
 
-	public void setArtistSong(List<Album> artistSong) {
-		this.artistSong = artistSong;
+	public void setArtistAlbum(List<Song> artistAlbum) {
+		this.artistAlbum = artistAlbum;
 	}
 
 
