@@ -7,6 +7,9 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.CardLayout;
+import java.awt.GridBagLayout;
+import javax.swing.JScrollBar;
+import java.awt.GridBagConstraints;
 
 public class SongPanel extends JPanel {
 
@@ -31,7 +34,18 @@ public class SongPanel extends JPanel {
 		
 		JPanel panel_1 = new JPanel();
 		add(panel_1, BorderLayout.CENTER);
-		panel_1.setLayout(new CardLayout(0, 0));
+		GridBagLayout gbl_panel_1 = new GridBagLayout();
+		gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel_1.rowHeights = new int[]{0, 0};
+		gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_1.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+		panel_1.setLayout(gbl_panel_1);
+		
+		JScrollBar scrollBar = new JScrollBar();
+		GridBagConstraints gbc_scrollBar = new GridBagConstraints();
+		gbc_scrollBar.gridx = 14;
+		gbc_scrollBar.gridy = 0;
+		panel_1.add(scrollBar, gbc_scrollBar);
 
 	}
 
