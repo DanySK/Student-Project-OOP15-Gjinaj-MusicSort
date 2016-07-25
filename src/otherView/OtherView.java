@@ -1,25 +1,24 @@
 package otherView;
 
-import java.awt.Choice;
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Font;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import sun.net.www.content.text.plain;
+
+import java.awt.*;
+import java.awt.event.*;
 
 public class OtherView {
 	private JFrame frmMusicsort;
 	private JTextField txtSearch;
 
 	private JFrame frame;
+	private JTable table;
+	private JList list;
+	
 
 	/**
 	 * Launch the application.
@@ -48,6 +47,11 @@ public class OtherView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		//list test
+		//list test
+		
+		
+		
 		
 		frmMusicsort = new JFrame();
 		frmMusicsort.getContentPane().setForeground(Color.GRAY);
@@ -61,9 +65,6 @@ public class OtherView {
 		westPanel.setBounds(6, 6, 250, 691);
 		
 		
-		
-		
-		
 		frmMusicsort.getContentPane().add(westPanel);
 		westPanel.setLayout(null);
 		
@@ -75,9 +76,83 @@ public class OtherView {
 		westPanel.add(txtSearch);
 		txtSearch.setColumns(10);
 		
-		JList list = new JList();
-		list.setBounds(103, 83, 1, 1);
-		westPanel.add(list);
+		
+		//fonte http://www.java2s.com/Code/Java/Swing-JFC/AsingleselectionJList.htm
+		
+
+		
+		
+		  Object tree[] = { "#Recenti","Preferiti","Cantanti", "Brani","Playlists" };
+
+		  JList jlst = new JList(tree);
+		  jlst.setFont(new Font("Noteworthy", Font.PLAIN, 12));
+
+		    jlst.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		    jlst.addListSelectionListener(new ListSelectionListener() {
+		    	public void valueChanged(ListSelectionEvent le) {
+		        int idx = jlst.getSelectedIndex();
+		        if (idx != -1)
+		          System.out.println("Current selection: " + tree[idx]);
+		        else
+		          System.out.println("Please choose a language.");
+		      }
+		    });
+
+		    JScrollPane jsp= new JScrollPane(jlst);
+		    jsp.setSize(153, 541);
+		    jsp.setLocation(47, 50);
+		
+		    westPanel.add(jsp);
+		    
+		    JButton btnNewPlaylist = new JButton("new Playlist");
+		    btnNewPlaylist.addActionListener(new ActionListener() {
+		    	public void actionPerformed(ActionEvent e) {
+		    		JFrame playlistname= new JFrame("Set Playlist Name");
+		    		playlistname.setLayout(new BorderLayout());
+		    		playlistname.setSize(200, 200);
+		    		
+		    		JTextField nameP= new JTextField();
+		    		JButton add= new JButton("add");
+		    		
+		    		
+		    		jlst.add(nameP.getText(), nameP);
+		    		playlistname.add(nameP,BorderLayout.NORTH);
+		    		playlistname.add(add,BorderLayout.SOUTH);
+		    		playlistname.setVisible(true);
+		    		add.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							// TODO Auto-generated method stub
+							String infoMessage, titleBar;
+							infoMessage= "Nome playlist Corretto?";
+							titleBar= "new playlist";
+							if (JOptionPane.showConfirmDialog(null, "Nome Playlist Corrett??", "WARNING",
+							        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+							    jlst.add(nameP.getText(), nameP);
+							    playlistname.setVisible(false);
+							} else {
+							    // no option
+							}
+							
+						}
+					});
+		    		playlistname.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		    	}
+		    });
+		    btnNewPlaylist.setBounds(37, 603, 163, 29);
+		    westPanel.add(btnNewPlaylist);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		JPanel southPanel = new JPanel();
 		southPanel.setBackground(Color.WHITE);
@@ -130,5 +205,4 @@ public class OtherView {
 		centerPanel.setLayout(null);
 		
 	}
-
 }
