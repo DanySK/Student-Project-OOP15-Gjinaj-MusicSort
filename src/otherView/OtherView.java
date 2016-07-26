@@ -108,7 +108,7 @@ public class OtherView {
 		    btnNewPlaylist.addActionListener(new ActionListener() {
 		    	public void actionPerformed(ActionEvent e) {
 		    		JFrame playlistname= new JFrame("Set Playlist Name");
-		    		playlistname.setLayout(new BorderLayout());
+		    		playlistname.getContentPane().setLayout(new BorderLayout());
 		    		playlistname.setSize(200, 200);
 		    		
 		    		JTextField nameP= new JTextField();
@@ -116,8 +116,8 @@ public class OtherView {
 		    		
 		    		
 		    		jlst.add(nameP.getText(), nameP);
-		    		playlistname.add(nameP,BorderLayout.NORTH);
-		    		playlistname.add(add,BorderLayout.SOUTH);
+		    		playlistname.getContentPane().add(nameP,BorderLayout.NORTH);
+		    		playlistname.getContentPane().add(add,BorderLayout.SOUTH);
 		    		playlistname.setVisible(true);
 		    		add.addActionListener(new ActionListener() {
 						
@@ -196,6 +196,11 @@ public class OtherView {
 		
 		
 		northPanel.add(choice);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(TendinaDx.values()));
+		comboBox.setBounds(888, 19, 28, 20);
+		northPanel.add(comboBox);
 		
 		JPanel centerPanel = new JPanel();
 		centerPanel.setBackground(Color.DARK_GRAY);
