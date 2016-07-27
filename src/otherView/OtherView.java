@@ -155,23 +155,29 @@ public class OtherView {
 		
 		
 		JPanel southPanel = new JPanel();
-		southPanel.setBackground(Color.WHITE);
-		southPanel.setBounds(6, 658, 1188, 56);
+		southPanel.setBackground(Color.DARK_GRAY);
+		southPanel.setBounds(6, 658, 1188, 63);
 		frmMusicsort.getContentPane().add(southPanel);
 		southPanel.setLayout(null);
 		
 		JButton pausePlay = new JButton("");
-		pausePlay.setIcon(new ImageIcon("C:\\Users\\tamar\\Desktop\\iconplay.png"));
+		pausePlay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		pausePlay.setForeground(Color.DARK_GRAY);
+		pausePlay.setBackground(Color.DARK_GRAY);
+		pausePlay.setIcon(new ImageIcon("C:\\Users\\tamar\\Desktop\\progetto\\img\\play-icon.png"));
 		pausePlay.setBounds(101, 0, 60, 63);
 		southPanel.add(pausePlay);
 		
 		JButton button = new JButton("");
-		button.setIcon(new ImageIcon("/Users/rrok/Documents/workspace/musicSortGui/img/back avanti.png"));
+		button.setIcon(new ImageIcon("C:\\Users\\tamar\\Desktop\\progetto\\img\\back avanti.png"));
 		button.setBounds(174, 6, 60, 40);
 		southPanel.add(button);
 		
 		JButton back = new JButton("");
-		back.setIcon(new ImageIcon("/Users/rrok/Documents/workspace/MusicSort/img/back.png"));
+		back.setIcon(new ImageIcon("C:\\Users\\tamar\\Desktop\\progetto\\img\\back.png"));
 		back.setBounds(31, 6, 60, 40);
 		southPanel.add(back);
 		
@@ -213,7 +219,13 @@ public class OtherView {
 		JMenuItem mntmModificaPlaylist = new JMenuItem("Modifica Playlist");
 		mnNewMenu.add(mntmModificaPlaylist);
 		
-		JMenuItem mntmImportaBrani = new JMenuItem("Importa Brani");
+		JMenuItem mntmAggiungiPlaylist = new JMenuItem("Aggiungi a Playlist");
+		mnNewMenu.add(mntmAggiungiPlaylist);
+		
+		JMenuItem mntmRimuoviPlaylist = new JMenuItem("Rimuovi Playlist");
+		mnNewMenu.add(mntmRimuoviPlaylist);
+		
+		JMenuItem mntmImportaBrani = new JMenuItem("Apri file");
 		mnNewMenu.add(mntmImportaBrani);
 		
 		JMenuItem mntmEsci = new JMenuItem("Esci");
