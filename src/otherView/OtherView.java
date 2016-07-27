@@ -183,7 +183,7 @@ public class OtherView {
 		frmMusicsort.getContentPane().add(northPanel);
 		
 		Choice choice = new Choice();
-		choice.setBounds(77, 16, 89, 27);
+		choice.setBounds(827, 16, 89, 27);
 		choice.setFont(new Font("Apple Color Emoji", Font.PLAIN, 12));
 		choice.setName("choice");
 		choice.add("Name");
@@ -191,16 +191,27 @@ public class OtherView {
 		northPanel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Sort By");
-		lblNewLabel.setBounds(24, 16, 61, 27);
+		lblNewLabel.setBounds(779, 16, 61, 27);
 		northPanel.add(lblNewLabel);
 		
 		
 		northPanel.add(choice);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(TendinaDx.values()));
-		comboBox.setBounds(888, 19, 28, 20);
-		northPanel.add(comboBox);
+		JMenu mnNewMenu = new JMenu("New menu");
+		mnNewMenu.setBounds(0, 0, 146, 22);
+		northPanel.add(mnNewMenu);
+		
+		JMenuItem mntmCrea = new JMenuItem("Crea Playlist");
+		mnNewMenu.add(mntmCrea);
+		
+		JMenuItem mntmModificaPlaylist = new JMenuItem("Modifica Playlist");
+		mnNewMenu.add(mntmModificaPlaylist);
+		
+		JMenuItem mntmImportaBrani = new JMenuItem("Importa Brani");
+		mnNewMenu.add(mntmImportaBrani);
+		
+		JMenuItem mntmEsci = new JMenuItem("Esci");
+		mnNewMenu.add(mntmEsci);
 		
 		JPanel centerPanel = new JPanel();
 		centerPanel.setBackground(Color.DARK_GRAY);
