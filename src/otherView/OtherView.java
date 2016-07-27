@@ -6,6 +6,8 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import com.sun.java.swing.plaf.windows.resources.windows;
+
 import sun.net.www.content.text.plain;
 
 import java.awt.*;
@@ -54,6 +56,13 @@ public class OtherView {
 		
 		
 		frmMusicsort = new JFrame();
+		frmMusicsort.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmMusicsort.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				//to do 
+			}
+		});
 		frmMusicsort.getContentPane().setForeground(Color.GRAY);
 		frmMusicsort.setSize(1200, 750);
 		frmMusicsort.setTitle("musicSortNew");
@@ -145,22 +154,11 @@ public class OtherView {
 							
 						}
 					});
-		    		playlistname.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		    		frmMusicsort.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		    	}
 		    });
 		    btnNewPlaylist.setBounds(37, 603, 163, 29);
 		    westPanel.add(btnNewPlaylist);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		JPanel southPanel = new JPanel();
 		southPanel.setBackground(Color.DARK_GRAY);
@@ -175,17 +173,17 @@ public class OtherView {
 		});
 		pausePlay.setForeground(Color.DARK_GRAY);
 		pausePlay.setBackground(Color.DARK_GRAY);
-		pausePlay.setIcon(new ImageIcon("C:\\Users\\tamar\\Desktop\\progetto\\img\\play-icon.png"));
+		pausePlay.setIcon(new ImageIcon("/Users/rrok/Documents/workspace/musicSortGui/img/play-icon.png"));
 		pausePlay.setBounds(101, 0, 60, 63);
 		southPanel.add(pausePlay);
 		
 		JButton button = new JButton("");
-		button.setIcon(new ImageIcon("C:\\Users\\tamar\\Desktop\\progetto\\img\\back avanti.png"));
+		button.setIcon(new ImageIcon("/Users/rrok/Documents/workspace/musicSortGui/img/back avanti.png"));
 		button.setBounds(174, 6, 60, 40);
 		southPanel.add(button);
 		
 		JButton back = new JButton("");
-		back.setIcon(new ImageIcon("C:\\Users\\tamar\\Desktop\\progetto\\img\\back.png"));
+		back.setIcon(new ImageIcon("/Users/rrok/Documents/workspace/musicSortGui/img/back.png"));
 		back.setBounds(31, 6, 60, 40);
 		southPanel.add(back);
 		
@@ -213,31 +211,60 @@ public class OtherView {
 		
 		northPanel.add(choice);
 		
-		JMenu mnNewMenu = new JMenu("New menu");
-		mnNewMenu.setBackground(Color.DARK_GRAY);
-		mnNewMenu.setForeground(Color.YELLOW);
-		mnNewMenu.setBounds(0, 0, 146, 22);
-		northPanel.add(mnNewMenu);
+		JMenuBar menuBar= new JMenuBar();
+		menuBar.setLocation(0, 0);
+		menuBar.setSize(72, 20);
+		JMenu menu = new JMenu("Options");
+		
+		
+		menuBar.add(menu);
+		
+		
+
+		menu.setHorizontalAlignment(SwingConstants.CENTER);
+		menu.setBackground(Color.DARK_GRAY);
+		menu.setForeground(Color.YELLOW);
+		menu.setBounds(0, 0, 146, 22);
+		
 		
 		JMenuItem mntmCrea = new JMenuItem("Crea Playlist");
 		mntmCrea.setBackground(Color.DARK_GRAY);
 		mntmCrea.setForeground(Color.YELLOW);
-		mnNewMenu.add(mntmCrea);
+		menu.add(mntmCrea);
 		
 		JMenuItem mntmModificaPlaylist = new JMenuItem("Modifica Playlist");
-		mnNewMenu.add(mntmModificaPlaylist);
+		menu.add(mntmModificaPlaylist);
 		
 		JMenuItem mntmAggiungiPlaylist = new JMenuItem("Aggiungi a Playlist");
-		mnNewMenu.add(mntmAggiungiPlaylist);
+		menu.add(mntmAggiungiPlaylist);
 		
 		JMenuItem mntmRimuoviPlaylist = new JMenuItem("Rimuovi Playlist");
-		mnNewMenu.add(mntmRimuoviPlaylist);
+		menu.add(mntmRimuoviPlaylist);
 		
 		JMenuItem mntmImportaBrani = new JMenuItem("Apri file");
-		mnNewMenu.add(mntmImportaBrani);
+		menu.add(mntmImportaBrani);
 		
 		JMenuItem mntmEsci = new JMenuItem("Esci");
-		mnNewMenu.add(mntmEsci);
+		menu.add(mntmEsci);
+		
+		northPanel.add(menuBar);
+		
+		/*--------------------
+		
+		uscire dal programma 
+		
+		*/
+		
+		mntmEsci.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				 System.exit(0);
+			}
+		});
+		
+		
 		
 		JPanel centerPanel = new JPanel();
 		centerPanel.setBackground(Color.DARK_GRAY);
