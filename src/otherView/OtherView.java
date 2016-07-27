@@ -82,9 +82,17 @@ public class OtherView {
 
 		
 		
-		  Object tree[] = { "#Recenti","Preferiti","Cantanti", "Brani","Playlists" };
+		 DefaultListModel<String> listModel= new DefaultListModel<>();
+		  listModel.addElement("Recenti");
+		  listModel.addElement("Preferiti");
+		  listModel.addElement("Cantanti");
+		  listModel.addElement("Brani");
+		  listModel.addElement("Playlists");
+		  
+		  @SuppressWarnings("unchecked")
+		JList jlst = new JList(listModel);
+		  
 
-		  JList jlst = new JList(tree);
 		  jlst.setFont(new Font("Noteworthy", Font.PLAIN, 12));
 
 		    jlst.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -92,7 +100,7 @@ public class OtherView {
 		    	public void valueChanged(ListSelectionEvent le) {
 		        int idx = jlst.getSelectedIndex();
 		        if (idx != -1)
-		          System.out.println("Current selection: " + tree[idx]);
+		          System.out.println("Current selection: " + listModel.getElementAt(idx));
 		        else
 		          System.out.println("Please choose a language.");
 		      }
@@ -129,7 +137,7 @@ public class OtherView {
 							titleBar= "new playlist";
 							if (JOptionPane.showConfirmDialog(null, "Nome Playlist Corrett??", "WARNING",
 							        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-							    jlst.add(nameP.getText(), nameP);
+							    listModel.addElement(nameP.getText());
 							    playlistname.setVisible(false);
 							} else {
 							    // no option
