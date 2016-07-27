@@ -55,14 +55,14 @@ public class OtherView {
 		
 		frmMusicsort = new JFrame();
 		frmMusicsort.getContentPane().setForeground(Color.GRAY);
-		frmMusicsort.setSize(1200, 800);
+		frmMusicsort.setSize(1200, 750);
 		frmMusicsort.setTitle("musicSortNew");
 		frmMusicsort.getContentPane().setLayout(null);
 		frmMusicsort.setResizable(false);
 		
 		JPanel westPanel = new JPanel();
-		westPanel.setBackground(Color.GREEN);
-		westPanel.setBounds(6, 6, 250, 691);
+		westPanel.setBackground(Color.DARK_GRAY);
+		westPanel.setBounds(6, 6, 250, 641);
 		
 		
 		frmMusicsort.getContentPane().add(westPanel);
@@ -156,13 +156,13 @@ public class OtherView {
 		
 		JPanel southPanel = new JPanel();
 		southPanel.setBackground(Color.WHITE);
-		southPanel.setBounds(6, 706, 1188, 66);
+		southPanel.setBounds(6, 658, 1188, 56);
 		frmMusicsort.getContentPane().add(southPanel);
 		southPanel.setLayout(null);
 		
 		JButton pausePlay = new JButton("");
-		pausePlay.setIcon(new ImageIcon("/Users/rrok/Documents/workspace/musicSortGui/img/play-icon.png"));
-		pausePlay.setBounds(102, 6, 60, 54);
+		pausePlay.setIcon(new ImageIcon("C:\\Users\\tamar\\Desktop\\iconplay.png"));
+		pausePlay.setBounds(101, 0, 60, 63);
 		southPanel.add(pausePlay);
 		
 		JButton button = new JButton("");
@@ -177,7 +177,7 @@ public class OtherView {
 		
 		
 		JPanel northPanel = new JPanel();
-		northPanel.setBackground(Color.CYAN);
+		northPanel.setBackground(Color.DARK_GRAY);
 		northPanel.setForeground(Color.MAGENTA);
 		northPanel.setBounds(268, 6, 926, 89);
 		frmMusicsort.getContentPane().add(northPanel);
@@ -191,17 +191,23 @@ public class OtherView {
 		northPanel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Sort By");
-		lblNewLabel.setBounds(779, 16, 61, 27);
+		lblNewLabel.setFont(new Font("Century Gothic", Font.BOLD, 14));
+		lblNewLabel.setForeground(Color.YELLOW);
+		lblNewLabel.setBounds(769, 16, 52, 27);
 		northPanel.add(lblNewLabel);
 		
 		
 		northPanel.add(choice);
 		
 		JMenu mnNewMenu = new JMenu("New menu");
+		mnNewMenu.setBackground(Color.DARK_GRAY);
+		mnNewMenu.setForeground(Color.YELLOW);
 		mnNewMenu.setBounds(0, 0, 146, 22);
 		northPanel.add(mnNewMenu);
 		
 		JMenuItem mntmCrea = new JMenuItem("Crea Playlist");
+		mntmCrea.setBackground(Color.DARK_GRAY);
+		mntmCrea.setForeground(Color.YELLOW);
 		mnNewMenu.add(mntmCrea);
 		
 		JMenuItem mntmModificaPlaylist = new JMenuItem("Modifica Playlist");
@@ -216,9 +222,9 @@ public class OtherView {
 		JPanel centerPanel = new JPanel();
 		centerPanel.setBackground(Color.DARK_GRAY);
 		centerPanel.setForeground(Color.LIGHT_GRAY);
-		centerPanel.setBounds(268, 107, 926, 587);
+		centerPanel.setBounds(268, 107, 926, 540);
 		frmMusicsort.getContentPane().add(centerPanel);
-		centerPanel.setLayout(null);
+		centerPanel.setLayout(new CardLayout(0, 0));
 		
 	}
 }
