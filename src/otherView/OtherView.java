@@ -5,13 +5,18 @@ package otherView;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import com.sun.java.swing.plaf.windows.resources.windows;
 
+import model.MyTableModel;
 import sun.net.www.content.text.plain;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Date;
+import java.util.Vector;
 
 public class OtherView {
 	private JFrame frmMusicsort;
@@ -20,6 +25,7 @@ public class OtherView {
 	private JFrame frame;
 	private JTable table;
 	private JList list;
+	private JTable showSongJTable;
 	
 
 	/**
@@ -48,12 +54,9 @@ public class OtherView {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize()  {
 		//list test
 		//list test
-		
-		
-		
 		
 		frmMusicsort = new JFrame();
 		frmMusicsort.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -136,15 +139,13 @@ public class OtherView {
 		    		playlistname.getContentPane().add(nameP,BorderLayout.NORTH);
 		    		playlistname.getContentPane().add(add,BorderLayout.SOUTH);
 		    		playlistname.setVisible(true);
+		    		playlistname.setLocation(150, 150);
 		    		add.addActionListener(new ActionListener() {
 						
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							// TODO Auto-generated method stub
-							String infoMessage, titleBar;
-							infoMessage= "Nome playlist Corretto?";
-							titleBar= "new playlist";
-							if (JOptionPane.showConfirmDialog(null, "Nome Playlist Corrett??", "WARNING",
+							if (JOptionPane.showConfirmDialog(null, "Nome Playlist Corect??", "WARNING",
 							        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 							    listModel.addElement(nameP.getText());
 							    playlistname.setVisible(false);
@@ -273,5 +274,66 @@ public class OtherView {
 		frmMusicsort.getContentPane().add(centerPanel);
 		centerPanel.setLayout(new CardLayout(0, 0));
 		
+		JScrollPane scrollPaneShowSongs = new JScrollPane();
+		centerPanel.add(scrollPaneShowSongs, "name_9428167759486");
+		
+		
+		
+		
+		
+		String[] columnNames = {"First Name",
+                "Last Name",
+                "Sport",
+                "# of Years",
+                "Vegetarian"};
+		
+		Object[][] data = {
+			    {"Kathy", "Smith",
+			     "Snowboarding", new Integer(5), new Boolean(false)},
+			    {"John", "Doe",
+			     "Rowing", new Integer(3), new Boolean(true)},
+			    {"Sue", "Black",
+			     "Knitting", new Integer(2), new Boolean(false)},
+			    {"Jane", "White",
+			     "Speed reading", new Integer(20), new Boolean(true)},
+			    {"Jane", "White",
+				     "Speed reading", new Integer(20), new Boolean(true)},
+			    {"Jane", "White",
+					     "Speed reading", new Integer(20), new Boolean(true)},
+			    
+			    {"Joe", "Brown",
+			     "Pool", new Integer(10), new Boolean(false)}
+			};
+		
+		
+		MyTableModel myTableModel = new MyTableModel();
+		showSongJTable = new JTable(data, columnNames);
+		showSongJTable.setPreferredScrollableViewportSize(showSongJTable.getPreferredSize());
+		
+		Vector<String> columnNameS = new Vector<String>();
+        columnNameS.add("Date");
+        columnNameS.add("String");
+        columnNameS.add("Decimal");
+        columnNameS.add("Remove");
+        
+        
+        Vector<Object> row1 = new Vector<Object>();
+        row1.add(new Date());
+        row1.add("A");
+        row1.add(new Double(5.1));
+        row1.add("Remove");
+        myTableModel.addRow(row1);
+        
+        
+        
+        myTableModel.setColumnNames(columnNameS);
+		
+		
+		showSongJTable.setModel(myTableModel);
+		showSongJTable.setSize(scrollPaneShowSongs.getWidth(),scrollPaneShowSongs.getHeight());
+		
+		scrollPaneShowSongs.setViewportView(showSongJTable);
+		
+	
 	}
 }
