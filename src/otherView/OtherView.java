@@ -2,21 +2,20 @@ package otherView;
 
 
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileFilter;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 
-import com.sun.java.swing.plaf.windows.resources.windows;
 
 import model.MyTableModel;
-import sun.net.www.content.text.plain;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Vector;
 
@@ -24,10 +23,56 @@ public class OtherView {
 	private JFrame frmMusicsort;
 	private JTextField txtSearch;
 
-	private JFrame frame;
-	private JTable table;
-	private JList list;
 	private JTable showSongJTable;
+	JPanel westPanel = new JPanel();
+	JPanel southPanel = new JPanel();
+	JPanel northPanel = new JPanel();
+	JPanel centerPanel = new JPanel();
+
+	
+	DefaultListModel<String> listModel= new DefaultListModel<>();
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	JList jlst = new JList(listModel);
+    JScrollPane jsp= new JScrollPane(jlst);
+	private AudioPlayer player = new AudioPlayer();
+	private Thread playbackThread;
+	private PlayingTimer timer;
+	
+	JSlider sliderTime = new JSlider();
+	
+	
+	
+
+	private boolean isPlaying = false;
+	private boolean isPause = true;
+	
+	private String audioFilePath;
+	private String lastOpenPath;
+	JButton btnNewPlaylist = new JButton("new Playlist");
+	JTextField nameP= new JTextField();
+	JButton addNewPlaylist= new JButton("add");
+	private JButton buttonOpen = new JButton("Open");
+	private JButton buttonPlay = new JButton("Play");
+	private JButton buttonPause = new JButton("Pause");
+	JButton avanti = new JButton("");
+	JButton back = new JButton("");
+	
+	
+	private ImageIcon iconOpen = new ImageIcon(getClass().getResource(
+			"/images/Open.png"));
+	private ImageIcon iconPlay = new ImageIcon(getClass().getResource(
+			"/images/Play.gif"));
+	private ImageIcon iconStop = new ImageIcon(getClass().getResource(
+			"/images/Stop.gif"));
+	private ImageIcon iconPause = new ImageIcon(getClass().getResource(
+			"/images/Pause.png"));
+	
+	private JLabel labelFileName = new JLabel("Playing File:");
+	private JLabel labelTimeCounter = new JLabel("00:00:00");
+	private JLabel labelDuration = new JLabel("00:00:00");
+	
+	
+	
 	
 
 	/**
@@ -74,7 +119,7 @@ public class OtherView {
 		frmMusicsort.getContentPane().setLayout(null);
 		frmMusicsort.setResizable(false);
 		
-		JPanel westPanel = new JPanel();
+
 		westPanel.setBackground(Color.DARK_GRAY);
 		westPanel.setBounds(6, 6, 250, 641);
 		
@@ -96,15 +141,13 @@ public class OtherView {
 
 		
 		
-		 DefaultListModel<String> listModel= new DefaultListModel<>();
+		 
 		  listModel.addElement("Recenti");
 		  listModel.addElement("Preferiti");
 		  listModel.addElement("Cantanti");
 		  listModel.addElement("Brani");
 		  listModel.addElement("Playlists");
-		  
-		  @SuppressWarnings("unchecked")
-		JList jlst = new JList(listModel);
+		
 		  
 
 		  jlst.setFont(new Font("Noteworthy", Font.PLAIN, 12));
@@ -120,29 +163,28 @@ public class OtherView {
 		      }
 		    });
 
-		    JScrollPane jsp= new JScrollPane(jlst);
+
 		    jsp.setSize(153, 541);
 		    jsp.setLocation(47, 50);
 		
 		    westPanel.add(jsp);
 		    
-		    JButton btnNewPlaylist = new JButton("new Playlist");
+		    
 		    btnNewPlaylist.addActionListener(new ActionListener() {
 		    	public void actionPerformed(ActionEvent e) {
 		    		JFrame playlistname= new JFrame("Set Playlist Name");
 		    		playlistname.getContentPane().setLayout(new BorderLayout());
 		    		playlistname.setSize(200, 200);
 		    		
-		    		JTextField nameP= new JTextField();
-		    		JButton add= new JButton("add");
+
 		    		
 		    		
 		    		jlst.add(nameP.getText(), nameP);
 		    		playlistname.getContentPane().add(nameP,BorderLayout.NORTH);
-		    		playlistname.getContentPane().add(add,BorderLayout.SOUTH);
+		    		playlistname.getContentPane().add(addNewPlaylist,BorderLayout.SOUTH);
 		    		playlistname.setVisible(true);
 		    		playlistname.setLocation(150, 150);
-		    		add.addActionListener(new ActionListener() {
+		    		addNewPlaylist.addActionListener(new ActionListener() {
 						
 						@Override
 						public void actionPerformed(ActionEvent e) {
@@ -163,37 +205,212 @@ public class OtherView {
 		    btnNewPlaylist.setBounds(37, 603, 163, 29);
 		    westPanel.add(btnNewPlaylist);
 		
-		JPanel southPanel = new JPanel();
+		
 		southPanel.setBackground(Color.DARK_GRAY);
 		southPanel.setBounds(6, 658, 1188, 63);
 		frmMusicsort.getContentPane().add(southPanel);
 		
-		JButton pausePlay = new JButton("");
-		pausePlay.setBounds(101, 0, 60, 63);
-		pausePlay.addActionListener(new ActionListener() {
+		
+		buttonPlay.setBounds(101, 0, 60, 63);
+		buttonPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
 		southPanel.setLayout(null);
-		pausePlay.setForeground(Color.DARK_GRAY);
-		pausePlay.setBackground(Color.DARK_GRAY);
-		pausePlay.setIcon(new ImageIcon("/Users/rrok/Documents/workspace/musicSortGui/img/play-icon.png"));
-		southPanel.add(pausePlay);
+		buttonPlay.setForeground(Color.DARK_GRAY);
+		buttonPlay.setBackground(Color.DARK_GRAY);
+		//pausePlay.setIcon(new ImageIcon("/Users/rrok/Documents/workspace/musicSortGui/img/play-icon.png"));
+		buttonPlay.setIcon(iconPlay);
+		southPanel.add(buttonPlay);
 		
-		JButton button = new JButton("");
-		button.setBounds(174, 6, 60, 40);
-		button.setIcon(new ImageIcon("/Users/rrok/Documents/workspace/musicSortGui/img/back avanti.png"));
-		southPanel.add(button);
 		
-		JButton back = new JButton("");
+		avanti.setBounds(174, 6, 60, 40);
+		avanti.setIcon(new ImageIcon("/Users/rrok/Documents/workspace/musicSortGui/img/back avanti.png"));
+		southPanel.add(avanti);
+		
+		
 		back.setBounds(31, 6, 60, 40);
 		back.setIcon(new ImageIcon("/Users/rrok/Documents/workspace/musicSortGui/img/back.png"));
 		southPanel.add(back);
+		buttonOpen.setLocation(248, 6);
+		buttonOpen.setSize(50, 50);
+		
+		southPanel.add(buttonOpen);
+		
+		
+		ActionListener MusicListener = new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				// TODO Auto-generated method stub
+				Object source = event.getSource();
+				if (source instanceof JButton) {
+					JButton button = (JButton) source;
+					if (button == buttonPlay) {
+						this.openFile();
+					} else if (button == back) {
+						if (!isPlaying) {
+							playBack();
+						} else {
+							stopPlaying();
+						}
+					} else if (button == buttonPause) {
+						if (!isPause) {
+							pausePlaying();
+						} else {
+							resumePlaying();
+						}
+					}
+				}
+			}
+
+			private void pausePlaying() {
+				buttonPause.setText("Resume");
+				isPause = true;
+				player.pause();
+				timer.pauseTimer();
+				playbackThread.interrupt();
+			}
+			
+			private void resumePlaying() {
+				buttonPause.setText("Pause");
+				isPause = false;
+				player.resume();
+				timer.resumeTimer();
+				playbackThread.interrupt();		
+			}
+			
+			private void resetControls() {
+				timer.reset();
+				timer.interrupt();
+
+				buttonPlay.setText("Play");
+				buttonPlay.setIcon(iconPlay);
+				
+				buttonPause.setEnabled(false);
+				
+				isPlaying = false;		
+			}
+
+			private void stopPlaying() {
+				isPause = false;
+				buttonPlay.setText("Pause");
+				buttonPause.setEnabled(false);
+				timer.reset();
+				timer.interrupt();
+				player.stop();
+				playbackThread.interrupt();
+			}
+			
+
+			private void openFile() {
+				// TODO Auto-generated method stub
+				JFileChooser fileChooser = null;
+				
+				if (lastOpenPath != null && !lastOpenPath.equals("")) {
+					fileChooser = new JFileChooser(lastOpenPath);
+				} else {
+					fileChooser = new JFileChooser();
+				}
+				
+				FileFilter wavFilter = new FileFilter() {
+					@Override
+					public String getDescription() {
+						return "Sound file (*.WAV)";
+					}
+
+					@Override
+					public boolean accept(File file) {
+						if (file.isDirectory()) {
+							return true;
+						} else {
+							return file.getName().toLowerCase().endsWith(".wav");
+						}
+					}
+				};
+
+				
+				fileChooser.setFileFilter(wavFilter);
+				fileChooser.setDialogTitle("Open Audio wav File ");
+				fileChooser.setAcceptAllFileFilterUsed(false);
+
+				int userChoice = fileChooser.showOpenDialog(fileChooser);
+				if (userChoice == JFileChooser.APPROVE_OPTION) {
+					audioFilePath = fileChooser.getSelectedFile().getAbsolutePath();
+					lastOpenPath = fileChooser.getSelectedFile().getParent();
+					if (isPlaying || isPause) {
+						stopPlaying();
+						while (player.getAudioClip().isRunning()) {
+							try {
+								Thread.sleep(100);
+							} catch (InterruptedException ex) {
+								ex.printStackTrace();
+							}
+						}
+					}
+					playBack();
+				}
+				
+			}
+			/**
+			 * Start playing back the sound.
+			 */
+			private void playBack() {
+				timer = new PlayingTimer(labelTimeCounter, sliderTime);
+				timer.start();
+				isPlaying = true;
+				playbackThread = new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						try {
+
+							buttonPlay.setText("Stop");
+							buttonPlay.setIcon(iconPlay);
+							buttonPlay.setEnabled(true);
+							
+							//buttonPause.setText("Pause");
+							//buttonPause.setEnabled(true);
+							
+							player.load(audioFilePath);
+							timer.setAudioClip(player.getAudioClip());
+							labelFileName.setText("Playing File: " + audioFilePath);
+							sliderTime.setMaximum((int) player.getClipSecondLength());
+							
+							labelDuration.setText(player.getClipLengthString());
+							player.play();
+							
+							resetControls();
+
+						} catch (UnsupportedAudioFileException ex) {
+							JOptionPane.showMessageDialog(frmMusicsort,  
+									"The audio format is unsupported!", "Error", JOptionPane.ERROR_MESSAGE);
+							resetControls();
+							ex.printStackTrace();
+						} catch (LineUnavailableException ex) {
+							JOptionPane.showMessageDialog(frmMusicsort,  
+									"Could not play the audio file because line is unavailable!", "Error", JOptionPane.ERROR_MESSAGE);
+							resetControls();
+							ex.printStackTrace();
+						} catch (IOException ex) {
+							JOptionPane.showMessageDialog(frmMusicsort,  
+									"I/O error while playing the audio file!", "Error", JOptionPane.ERROR_MESSAGE);
+							resetControls();
+							ex.printStackTrace();
+						}
+
+					}
+				});
+
+				playbackThread.start();
+			}
+
+		};
 		
 		
 		
-		 JLabel labelFileName = new JLabel("Playing File:");
-		 JLabel labelTimeCounter = new JLabel("00:00:00");
+		buttonPlay.addActionListener(MusicListener);
+		
 		 labelTimeCounter.setHorizontalAlignment(SwingConstants.CENTER);
 		 labelTimeCounter.setForeground(Color.WHITE);
 		 labelTimeCounter.setBounds(339, 0, 97, 48);
@@ -210,17 +427,17 @@ public class OtherView {
 		 southPanel.add(labelTimeCounter);
 		 southPanel.add(labelDuration);
 		 
-		 JSlider slider = new JSlider();
-		 slider.setBounds(423, 17, 625, 29);
 		 
-		 slider.setEnabled(false);
-		 slider.setValue(0);
+		 sliderTime.setBounds(423, 17, 625, 29);
 		 
-		 southPanel.add(slider);
+		 sliderTime.setEnabled(false);
+		 sliderTime.setValue(0);
+		 
+		 southPanel.add(sliderTime);
 		 
 		
 		
-		JPanel northPanel = new JPanel();
+		
 		northPanel.setBackground(Color.DARK_GRAY);
 		northPanel.setForeground(Color.MAGENTA);
 		northPanel.setBounds(268, 6, 926, 89);
@@ -266,8 +483,7 @@ public class OtherView {
 		
 		mntmImportaBrani.addActionListener(new ActionListener() {
 			
-			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed1(ActionEvent e) {
 				// TODO Auto-generated method stub
 				System.out.println("priva click");
 				
@@ -307,8 +523,24 @@ public class OtherView {
 				}
 				
 			}
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
 		});
 
+		
+		
+		//------metodi per riproduzione
+		
+		
+		
+		
+		
+		
+		
 		
 		JMenuItem mntmCrea = new JMenuItem("Crea Playlist");
 		menu.add(mntmCrea);
@@ -348,7 +580,7 @@ public class OtherView {
 		
 		
 		
-		JPanel centerPanel = new JPanel();
+		
 		centerPanel.setBackground(Color.DARK_GRAY);
 		centerPanel.setForeground(Color.LIGHT_GRAY);
 		centerPanel.setBounds(268, 107, 926, 540);
