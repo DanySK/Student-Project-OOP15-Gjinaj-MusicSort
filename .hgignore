@@ -1,1 +1,5 @@
-syntax: glob*/bin**.class*
+syntax: glob
+bin
+obj
+*.suo
+*.user
