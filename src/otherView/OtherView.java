@@ -5,6 +5,7 @@ package otherView;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
@@ -15,6 +16,7 @@ import sun.net.www.content.text.plain;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.util.Date;
 import java.util.Vector;
 
@@ -165,28 +167,57 @@ public class OtherView {
 		southPanel.setBackground(Color.DARK_GRAY);
 		southPanel.setBounds(6, 658, 1188, 63);
 		frmMusicsort.getContentPane().add(southPanel);
-		southPanel.setLayout(null);
 		
 		JButton pausePlay = new JButton("");
+		pausePlay.setBounds(101, 0, 60, 63);
 		pausePlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
+		southPanel.setLayout(null);
 		pausePlay.setForeground(Color.DARK_GRAY);
 		pausePlay.setBackground(Color.DARK_GRAY);
 		pausePlay.setIcon(new ImageIcon("/Users/rrok/Documents/workspace/musicSortGui/img/play-icon.png"));
-		pausePlay.setBounds(101, 0, 60, 63);
 		southPanel.add(pausePlay);
 		
 		JButton button = new JButton("");
-		button.setIcon(new ImageIcon("/Users/rrok/Documents/workspace/musicSortGui/img/back avanti.png"));
 		button.setBounds(174, 6, 60, 40);
+		button.setIcon(new ImageIcon("/Users/rrok/Documents/workspace/musicSortGui/img/back avanti.png"));
 		southPanel.add(button);
 		
 		JButton back = new JButton("");
-		back.setIcon(new ImageIcon("/Users/rrok/Documents/workspace/musicSortGui/img/back.png"));
 		back.setBounds(31, 6, 60, 40);
+		back.setIcon(new ImageIcon("/Users/rrok/Documents/workspace/musicSortGui/img/back.png"));
 		southPanel.add(back);
+		
+		
+		
+		 JLabel labelFileName = new JLabel("Playing File:");
+		 JLabel labelTimeCounter = new JLabel("00:00:00");
+		 labelTimeCounter.setHorizontalAlignment(SwingConstants.CENTER);
+		 labelTimeCounter.setForeground(Color.WHITE);
+		 labelTimeCounter.setBounds(339, 0, 97, 48);
+		 JLabel labelDuration = new JLabel("00:00:00");
+		 labelDuration.setHorizontalAlignment(SwingConstants.CENTER);
+		 labelDuration.setForeground(Color.WHITE);
+		 labelDuration.setBackground(Color.WHITE);
+		 labelDuration.setBounds(1033, -2, 97, 48);
+		 
+		 
+		 
+		 
+		 southPanel.add(labelDuration);
+		 southPanel.add(labelTimeCounter);
+		 southPanel.add(labelDuration);
+		 
+		 JSlider slider = new JSlider();
+		 slider.setBounds(423, 17, 625, 29);
+		 
+		 slider.setEnabled(false);
+		 slider.setValue(0);
+		 
+		 southPanel.add(slider);
+		 
 		
 		
 		JPanel northPanel = new JPanel();
@@ -228,10 +259,61 @@ public class OtherView {
 		menu.setBounds(0, 0, 146, 22);
 		
 		
+		JMenuItem mntmImportaBrani = new JMenuItem("Apri file");
+		menu.add(mntmImportaBrani);
+		
+
+		
+		mntmImportaBrani.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println("priva click");
+				
+				JFileChooser fileChooser = new JFileChooser();;
+				
+				
+				FileFilter wavFilter = new FileFilter() {
+					@Override
+					public String getDescription() {
+						return "Sound file (*.WAV)";
+					}
+
+					@Override
+					public boolean accept(File file) {
+						if (file.isDirectory()) {
+							return true;
+						} else {
+							return file.getName().toLowerCase().endsWith(".wav");
+						}
+					}
+				};
+
+				
+				fileChooser.setFileFilter(wavFilter);
+				fileChooser.setDialogTitle("Open Audio File");
+				fileChooser.setAcceptAllFileFilterUsed(false);
+				//Create a file chooser
+				
+				//In response to a button click:
+				fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+				int result = fileChooser.showOpenDialog(new JPanel());
+				
+
+				if (result == JFileChooser.APPROVE_OPTION) {
+				    File selectedFile = fileChooser.getSelectedFile();
+				    System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+				}
+				
+			}
+		});
+
+		
 		JMenuItem mntmCrea = new JMenuItem("Crea Playlist");
-		mntmCrea.setBackground(Color.DARK_GRAY);
-		mntmCrea.setForeground(Color.YELLOW);
 		menu.add(mntmCrea);
+		
+		
 		
 		JMenuItem mntmModificaPlaylist = new JMenuItem("Modifica Playlist");
 		menu.add(mntmModificaPlaylist);
@@ -242,8 +324,7 @@ public class OtherView {
 		JMenuItem mntmRimuoviPlaylist = new JMenuItem("Rimuovi Playlist");
 		menu.add(mntmRimuoviPlaylist);
 		
-		JMenuItem mntmImportaBrani = new JMenuItem("Apri file");
-		menu.add(mntmImportaBrani);
+
 		
 		JMenuItem mntmEsci = new JMenuItem("Esci");
 		menu.add(mntmEsci);
@@ -314,7 +395,6 @@ public class OtherView {
         columnNameS.add("Date");
         columnNameS.add("String");
         columnNameS.add("Decimal");
-        columnNameS.add("Remove");
         
         
         Vector<Object> row1 = new Vector<Object>();
