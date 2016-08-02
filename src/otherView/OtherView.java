@@ -334,6 +334,9 @@ public class OtherView {
 		
 		scrollPaneShowSongs.setViewportView(showSongJTable);
 		
+		// Then on your component(s)
+		showSongJTable.addMouseListener(new PopClickListener());
+		
 	
 	}
 }
