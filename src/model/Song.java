@@ -1,8 +1,6 @@
 package model;
 
 import java.rmi.server.UID;
-import java.util.Optional;
-import java.util.UUID;
 
 public class Song {
 	
@@ -52,6 +50,7 @@ public class Song {
 		return path;
 	}
 	
+	@Override
 	public String toString(){
 		return "artist: " + artist + " - " + title;
 	}

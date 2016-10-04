@@ -9,7 +9,7 @@ public interface IPlayer {
 	
 	/**
 	 * play song from path
-	 * @param songPath
+	 * @param songPath String
 	 */
 	public void play(String songPath);
 	

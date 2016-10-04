@@ -105,6 +105,7 @@ public class Playlist implements IPlaylist{
 	 * Song List to String
 	 * @return songToString String
 	 */
+	@Override
 	public String toString() {
 		String string = "";
 		for (Song song : songsList) {

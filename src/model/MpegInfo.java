@@ -31,7 +31,6 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
@@ -87,7 +86,8 @@ public final class MpegInfo implements TagInfo {
      * @throws IOException
      * @return boolean b
      */
-    public boolean load(final File input) {
+    @Override
+	public boolean load(final File input) {
         this.size = input.length();
         this.location = input.getPath();
         try {
@@ -107,10 +107,7 @@ public final class MpegInfo implements TagInfo {
      * @throws IOException
      * @throws UnsupportedAudioFileException
      */
-    public void load(final URL input) throws IOException, UnsupportedAudioFileException {
-        this.location = input.toString();
-        loadInfo(input);
-    }
+ 
 
     /**
      * Load and parse MPEG info from InputStream.
@@ -225,7 +222,7 @@ public final class MpegInfo implements TagInfo {
                 year = (String) props.get("date");
             }
             if (props.containsKey("duration")){
-                total = (long) Math.round((((Long) props.get("duration")).longValue()) / 1000000);
+                total = Math.round((((Long) props.get("duration")).longValue()) / 1000000);
             }
             this.durationInMinutes = new Duration((int)(this.total/60), (int)(this.total % 60));
             if (props.containsKey("mp3.id3tag.genre")){
@@ -242,18 +239,7 @@ public final class MpegInfo implements TagInfo {
         }
     }
 
-    /**
-     * Load MP3 info from URL.
-     *
-     * @param input
-     * @throws IOException
-     * @throws UnsupportedAudioFileException
-     */
-    private void loadInfo(final URL input) throws IOException, UnsupportedAudioFileException {
-        final AudioFileFormat aff = AudioSystem.getAudioFileFormat(input);
-        loadInfo(aff);
-        loadShoutastInfo(aff);
-    }
+    
 
     /**
      * Load Shoutcast info from AudioFileFormat.
@@ -262,7 +248,7 @@ public final class MpegInfo implements TagInfo {
      * @throws IOException
      * @throws UnsupportedAudioFileException
      */
-    @SuppressWarnings("unchecked") // cause it depends on the library (map not parametrized)
+    @SuppressWarnings({ "unchecked", "unused" }) // cause it depends on the library (map not parametrized)
     private void loadShoutastInfo(final AudioFileFormat aff) throws IOException, UnsupportedAudioFileException {
         final String type = aff.getType().toString();
         if (!type.equalsIgnoreCase("mp3")){
@@ -389,7 +375,8 @@ public final class MpegInfo implements TagInfo {
     /**
      * {@inheritDoc}
      */
-    public Optional<String> getGenre() {
+    @Override
+	public Optional<String> getGenre() {
         return Optional.ofNullable(genre);
     }
     

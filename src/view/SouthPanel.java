@@ -18,28 +18,25 @@ import javax.swing.filechooser.FileFilter;
 
 import controller.MainController;
 import controller.MusicControllerInterface;
-import util.FileHelper;
 public class SouthPanel extends JPanel{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JButton buttonOpen = new JButton("Open");
+	private JButton buttonOpen = new JButton("Apri");
 	private JButton buttonPlay = new JButton();
 	private JButton buttonNext = new JButton();
 	private JButton buttonBack = new JButton();
-	
-	JPanel sEstPanel = new JPanel();
-
-
-	//Playing playing = new Playing();
-	MusicControllerInterface controller;
-	JSlider progressSlider = new JSlider();
-
-	public JLabel labelFileReproducing = new JLabel("Playing File: no File Playing");
+	private JLabel labelFileReproducing = new JLabel("File in riprodzione: nessun File");
 	private JLabel labelTimeCounter = new JLabel("-:-:-");
 	private JLabel labelDuration = new JLabel("-:-:-");
+	private JPanel sEstPanel = new JPanel();
+	private MusicControllerInterface controller;
+	private JSlider progressSlider = new JSlider();
+	
+
+	
 	
 	
 	private ImageIcon iconOpen = new ImageIcon(getClass().getResource(
@@ -58,6 +55,7 @@ public class SouthPanel extends JPanel{
 	public SouthPanel(MainController controller) {
 		// TODO Auto-generated constructor stub
 		progressSlider.setValue(0);
+		progressSlider.setEnabled(false);
 		this.controller= controller;
 		Image btnplay = iconPlay.getImage(); // transform it 
 		Image newimgPlay = btnplay.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  

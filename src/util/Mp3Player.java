@@ -8,7 +8,6 @@ import javazoom.jlgui.basicplayer.BasicPlayer;
 import javazoom.jlgui.basicplayer.BasicPlayerEvent;
 import javazoom.jlgui.basicplayer.BasicPlayerException;
 import javazoom.jlgui.basicplayer.BasicPlayerListener;
-import view.ProgressBarThread;
 
 /**
  * 
@@ -30,8 +29,8 @@ public class Mp3Player implements IPlayer, BasicPlayerListener{
 	
 	/**
 	 * new mp3 istance of mp3 player, SINGLETON istance, there will be only one player
-	 * @param controller
-	 * @return Mp3Player
+	 * @param controller MainController
+	 * @return Mp3Player Mp3Player
 	 */
 	public static Mp3Player newInstance(MainController controller){
 		if(mp3Player == null){
@@ -96,7 +95,7 @@ public class Mp3Player implements IPlayer, BasicPlayerListener{
      * {@inheritDoc}
      */
 	@Override
-	public void opened(Object arg0, Map arg1) {
+	public void opened(Object arg0, @SuppressWarnings("rawtypes") Map arg1) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -105,7 +104,7 @@ public class Mp3Player implements IPlayer, BasicPlayerListener{
      * {@inheritDoc}
      */
 	@Override
-	public void progress(int arg0, long arg1, byte[] arg2, Map arg3) {
+	public void progress(int arg0, long arg1, byte[] arg2, @SuppressWarnings("rawtypes") Map arg3) {
 		// TODO Auto-generated method stub
 		
 	}

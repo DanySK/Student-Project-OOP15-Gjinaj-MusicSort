@@ -54,7 +54,7 @@ public class NorthPanel extends JPanel {
 
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBorderPainted(false);
-		JMenu menu = new JMenu("Options");
+		JMenu menu = new JMenu("Opzioni");
 		menuBar.add(menu);
 
 		menu.setHorizontalAlignment(SwingConstants.CENTER);
@@ -88,22 +88,17 @@ public class NorthPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				final JFrame newPlaylistFrame = new JFrame("Create your Playlist");
+				final JFrame newPlaylistFrame = new JFrame("Crea la tua Playlist");
 				final JPanel panelChoosePlaylist = new JPanel();
-				final JLabel lblChoosePlaylist = new JLabel("Insert playlist name  ");
+				final JLabel lblChoosePlaylist = new JLabel("Inserisci il nome:");
 				final JTextField edtNamePlaylist = new JTextField(10);
-				final JButton btnCreatePlaylist = new JButton("Create");
+				final JButton btnCreatePlaylist = new JButton("Crea");
 				btnCreatePlaylist.addActionListener(new ActionListener() {
 
 					@Override
 					public void actionPerformed(final ActionEvent e) {
-						// controller.newPlaylistFile(tfChoosePlaylist.getText());
-						
 						newPlaylistFrame.dispose();
-						// controller.getTracksManager().createNewPlaylist(edtNamePlaylist.toString());
 						controller.createPlaylist(edtNamePlaylist.getText());
-						
-
 					}
 				});
 
@@ -127,7 +122,7 @@ public class NorthPanel extends JPanel {
 				FileFilter Filter = new FileFilter() {
 					@Override
 					public String getDescription() {
-						return "Playlist file (*.mspls)";
+						return "Playlist file (*.msort)";
 					}
 
 					@Override
@@ -135,7 +130,7 @@ public class NorthPanel extends JPanel {
 						if (file.isDirectory()) {
 							return true;
 						} else {
-							return file.getName().toLowerCase().endsWith(".msplst");
+							return file.getName().toLowerCase().endsWith(".msort");
 						}
 					}
 				};
@@ -151,7 +146,9 @@ public class NorthPanel extends JPanel {
 		});
 		noMenuPanel.add(choice);
 		JTextField txtSearch = new JTextField(0);
-		txtSearch.setText("type here");
+		
+		txtSearch.setText("tba searching");
+		txtSearch.setEditable(false);
 		noMenuPanel.add(txtSearch);
 		setLayout(new BorderLayout(0, 0));
 		new BorderLayout();

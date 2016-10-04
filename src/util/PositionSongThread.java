@@ -16,6 +16,7 @@ public class PositionSongThread extends Thread {
 			// TODO Auto-generated constructor stub
 	    	this.controller=controller;
 		}
+		@Override
 		public void run() {
 			while (true) {
 				try {
@@ -44,7 +45,7 @@ public class PositionSongThread extends Thread {
 		
 		/**
 		 * used to stop incremetenting of counter
-		 * @param paused
+		 * @param paused boolean
 		 */
 		public void setPausedThread (boolean paused) {
 			this.paused = paused;

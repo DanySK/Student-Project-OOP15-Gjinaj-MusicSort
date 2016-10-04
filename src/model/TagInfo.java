@@ -24,8 +24,6 @@ package model;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.Optional;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
@@ -35,9 +33,6 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public interface TagInfo {
     
-    void load(InputStream input) throws IOException, UnsupportedAudioFileException;
-
-    void load(URL input) throws IOException, UnsupportedAudioFileException;
 
     boolean load(File input) throws IOException, UnsupportedAudioFileException;
 

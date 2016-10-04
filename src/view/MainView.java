@@ -6,9 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import controller.MainController;
-import model.Playlist;
-import model.LibraryManager;
-import util.FileHelper;
 import view.WestPanel;
 import javax.swing.BoxLayout;
 
@@ -17,25 +14,24 @@ public class MainView {
 	private JFrame frmMusicsort;
 	private JPanel northPanel;
 	public SouthPanel southPanel;
-	public CentralPanel centralPanel;
+	public CentrePanel centrePanel;
 	public WestPanel westPanel;
 	JPanel cNordCentroWest = new JPanel();
 	JPanel cNord_Centro = new JPanel();
 	MainController controller;
-	private Dimension screen;
-	private static final String PLAYLISTS_FOLDER = "res/playlists";
-	private static final String PLAYLIST_EXTENSION = ".txt";
 
 	/**
-	 * Create the application.
+	 * instance of  panels.
+	 * @param controller MainController
 	 */
 	public MainView(MainController controller) {
 		southPanel = new SouthPanel(controller);
 		northPanel = new NorthPanel(controller);
 		westPanel= new WestPanel(controller);
-		centralPanel = new CentralPanel(controller);
+		centrePanel = new CentrePanel(controller);
 		this.controller= controller;
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					initialize();
@@ -67,14 +63,14 @@ public class MainView {
 		
 		cNord_Centro.setLayout(new BorderLayout());
 		cNord_Centro.add(northPanel, BorderLayout.NORTH);
-		cNord_Centro.add(centralPanel, BorderLayout.CENTER);
+		cNord_Centro.add(centrePanel, BorderLayout.CENTER);
 		
 		cNordCentroWest.setLayout(new BorderLayout());
 		cNordCentroWest.add(westPanel,BorderLayout.WEST);
 		cNordCentroWest.add(cNord_Centro, BorderLayout.CENTER);
 		
 		
-		centralPanel.setLayout(new BoxLayout(centralPanel, BoxLayout.X_AXIS));
+		centrePanel.setLayout(new BoxLayout(centrePanel, BoxLayout.X_AXIS));
 		
 		westPanel.setLayout(new BoxLayout(westPanel, BoxLayout.X_AXIS));
 		

@@ -34,17 +34,11 @@ public class PopUpDemo extends JPopupMenu{
 			menuPlaylisToAdd.get(i).addActionListener( new listenerAddToPlaylist(rowSelected,menuPlaylisToAdd.get(i).getText(),controller));
 			
 		}
-		remove = new JMenuItem("remove");
+		remove = new JMenuItem("Rimuovi");
 		remove.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			
-	
-					//se rimuovo la canzone che stavo ascoltando fermo il player.
-					//controller.stop();
-					System.out.println(rowSelected);
-
 				controller.getLibraryManager().getCurrentPlaylist().removeSong(rowSelected);
 				System.out.println("rimossa");
 			}

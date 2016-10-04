@@ -21,7 +21,7 @@ public class FileHelper {
 
 	/**
 	 * Load The song using song Path
-	 * @param path
+	 * @param path String
 	 * @return Song
 	 */
 	public static Song loadSong(String path) {
@@ -41,9 +41,9 @@ public class FileHelper {
 	
 	/**
 	 *  Used to save all palylists that were created or were the have ad change
-	 * @param playlist
-	 * @param path
-	 * @param playListExtension
+	 * @param playlist IPlaylist
+	 * @param path String
+	 * @param playListExtension String
 	 */
 	public static void persistPlaylist(IPlaylist playlist, String path, String playListExtension) {
 		System.out.println(playlist.getName());
@@ -70,9 +70,9 @@ public class FileHelper {
 
 	/**
 	 * delete Playlist passing params
-	 * @param playlist
-	 * @param path
-	 * @param playListExtension
+	 * @param playlist Playlist
+	 * @param path String
+	 * @param playListExtension String
 	 */
 	public static void deletePlaylist(Playlist playlist, String path, String playListExtension) {
 		String playlistPath = path + "/" + playlist.getName() + playListExtension;
@@ -81,10 +81,10 @@ public class FileHelper {
 
 	/**
 	 * Rename Playlist with the new name
-	 * @param oldName
-	 * @param newName
-	 * @param path
-	 * @param playListExtension
+	 * @param oldName String
+	 * @param newName String
+	 * @param path String
+	 * @param playListExtension String
 	 */
 	public static void renamePlaylist(String oldName, String newName, String path, String playListExtension) {
 		String oldPath = path + "/" + oldName + playListExtension;
@@ -100,10 +100,10 @@ public class FileHelper {
 
 	/**
 	 * Load All playlists 
-	 * @param path
-	 * @param playListExtension
-	 * @param queueExtension
-	 * @return List<IPlaylist>
+	 * @param path String
+	 * @param playListExtension String
+	 * @param queueExtension String
+	 * @return List<IPlaylist> List<IPlaylist>
 	 */
 	public static List<IPlaylist> loadPlayLists(String path, String playListExtension, String queueExtension) {
 		File folder = new File(path);

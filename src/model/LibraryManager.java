@@ -1,16 +1,9 @@
 package model;
 
 import java.io.File;
-import java.rmi.server.UID;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 
-import com.apple.eio.FileManager;
-
-import sun.util.logging.resources.logging;
 import util.FileHelper;
 /**
  * 
@@ -31,7 +24,7 @@ public class LibraryManager {
 	private IPlaylist currentPlaylist;
 	private CurrentSong currentSong;
 	private static final String PLAYLISTS_FOLDER = "res/playlists";
-	private static final String PLAYLIST_EXTENSION = ".txt";
+	private static final String PLAYLIST_EXTENSION = ".msort";
 	private static final String QUEUE_EXTENSION = ".queue";
 	/**
 	 * set first the song queue as the first selected Playlist
@@ -120,8 +113,10 @@ public class LibraryManager {
 	 * Delete a playlist from id
 	 * @param id
 	 */
-	public void deletePlaylist(String id){
+	public void deletePlaylist(String id, int index){
 		FileHelper.deletePlaylist(getPlaylistById(id), PLAYLISTS_FOLDER, PLAYLIST_EXTENSION);
+		this.userPlaylists.remove(index);
+		
 	}
 	
 	public void addSongToQueue(Song song){
@@ -264,13 +259,6 @@ public class LibraryManager {
 		public CurrentSong(Song song, int positionInPlaylist){
 			this.song = song;
 			this.positionInPlaylist = positionInPlaylist;
-		}
-		/**
-		 * return the current song
-		 * @return Song
-		 */
-		public Song getSong() {
-			return song;
 		}
 		/**
 		 * Change the current song
