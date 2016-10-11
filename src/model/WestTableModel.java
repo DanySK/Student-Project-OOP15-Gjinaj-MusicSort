@@ -6,25 +6,24 @@ import java.util.Vector;
 
 import javax.swing.table.AbstractTableModel;
 
+import controller.MainController;
+
 
 public class WestTableModel extends AbstractTableModel {
 	
 	private static final long serialVersionUID = 1L;
 	private Vector<String> colNames;
-	private List<String> playlists = new ArrayList<>();
-	@SuppressWarnings("unused")
-	private IPlaylist queue;
+	private List<String> playlists;
 
 	
-	public WestTableModel(Vector<String> colnames, List<Playlist> playlists, IPlaylist queue) {
+	public WestTableModel(Vector<String> colnames, MainController controller) {
 		
+		playlists = new ArrayList<>();
 		this.colNames = colnames;
-		System.out.println(queue.getName());
-		String s = queue.getName();
-		System.out.println(queue.getName()+"dio porco");
-		this.playlists.add(s);
-;		for(Playlist p: playlists ){
-			this.playlists.add(p.getName());
+		this.playlists.add(controller.getLibraryManager().getQueue().getName());
+	
+;		for(String pTitle :controller.getPlaylistsNames() ){
+			this.playlists.add(pTitle);
 		}
 	}
 
@@ -86,7 +85,7 @@ public class WestTableModel extends AbstractTableModel {
 	    String pName = playlists.get(row);
 	    return  pName;
 	}
-	public boolean isCellEditable(int rowIndex, int columnIndex, List<Integer> listNotEditable) {
+	public boolean isCellEditable(int rowIndex, int columnIndex) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -98,7 +97,6 @@ public class WestTableModel extends AbstractTableModel {
 		for(IPlaylist p : playlists){
 			this.playlists.add(p.getName());
 		}
-		System.out.println(playlists.toString());
 		fireTableChanged(null);
 	}
 }

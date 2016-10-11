@@ -20,13 +20,24 @@ public class PositionSongThread extends Thread {
 		public void run() {
 			while (true) {
 				try {
-					Thread.sleep(1000);
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					if(!paused){
 					sec++;
-					if(sec==controller.getCurrentSongSeconds())
-						controller.onTrackFinished();
+					try {
+						if(sec==controller.getReproducingSongSeconds())
+							controller.onTrackFinished();
+						
+					} catch (Exception e) {
+						// TODO: handle exception
 					}
-				} catch (InterruptedException e) {
+					
+					}
+				} catch (java.lang.NullPointerException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

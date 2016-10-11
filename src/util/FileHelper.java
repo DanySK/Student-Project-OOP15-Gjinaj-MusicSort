@@ -106,10 +106,23 @@ public class FileHelper {
 	 * @return List<IPlaylist> List<IPlaylist>
 	 */
 	public static List<IPlaylist> loadPlayLists(String path, String playListExtension, String queueExtension) {
+		//se ce la cartella res/playlist
+		//else altrimenit crea 
+		
 		File folder = new File(path);
 		File[] listOfFiles = folder.listFiles();
+
 		List<IPlaylist> playlists = new ArrayList<>();
 		log("Loading playlsts..");
+		
+		if(listOfFiles ==null){
+			//torno solo la queue vuota
+			IPlaylist queue;
+			queue = SongQueue.getInstance();
+			playlists.add(queue);
+			return playlists;
+		}
+		else{
 		for (int i = 0; i < listOfFiles.length; i++) {
 			File file = listOfFiles[i];
 			if (file.isFile() && (file.getName().endsWith(playListExtension) || file.getName().endsWith(queueExtension))) {
@@ -142,6 +155,7 @@ public class FileHelper {
 			log(playlist.toString());
 		}
 		return playlists;
+		}
 	}
 
 	/**

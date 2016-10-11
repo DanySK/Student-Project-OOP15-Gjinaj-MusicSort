@@ -65,4 +65,9 @@ public interface MusicControllerInterface {
      * @return String
      */
 	public String getReproducingSongInfo() ;
+	
+	/**
+     * Stop the music is playing
+     */
+	 void stop();
 }

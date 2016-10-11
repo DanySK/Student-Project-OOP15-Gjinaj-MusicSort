@@ -52,7 +52,7 @@ public class MainView {
 		frmMusicsort.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				controller.persistPlaylists();
+				controller.getLibraryManager().persistPlaylists();
 				}
 		});
 		

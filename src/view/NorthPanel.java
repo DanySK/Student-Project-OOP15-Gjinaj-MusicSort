@@ -69,7 +69,7 @@ public class NorthPanel extends JPanel {
 		menu.add(menuCreaPlaylist);
 
 		JMenuItem menuCaricaPlaylist = new JMenuItem("Carica Playlist");
-		menu.add(menuCaricaPlaylist);
+		//menu.add(menuCaricaPlaylist);
 
 		JMenuItem menuEsci = new JMenuItem("Esci");
 		menu.add(menuEsci);
@@ -80,6 +80,7 @@ public class NorthPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				controller.getLibraryManager().persistPlaylists();
 				System.exit(0);
 			}
 		});
@@ -144,12 +145,12 @@ public class NorthPanel extends JPanel {
 
 			}
 		});
-		noMenuPanel.add(choice);
+		//noMenuPanel.add(choice);
 		JTextField txtSearch = new JTextField(0);
 		
 		txtSearch.setText("tba searching");
 		txtSearch.setEditable(false);
-		noMenuPanel.add(txtSearch);
+		//noMenuPanel.add(txtSearch);
 		setLayout(new BorderLayout(0, 0));
 		new BorderLayout();
 		this.add(menuPanel, BorderLayout.NORTH);

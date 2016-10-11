@@ -20,6 +20,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+
 import controller.MainController;
 import model.Playlist;
 import model.WestTableModel;
@@ -31,10 +34,8 @@ public class WestPanel extends JPanel {
 	private WestTableModel westTableModel = null;
 	private JTable westMenuTable;
 	private JScrollPane scrollPane = new JScrollPane();
-	private JLabel lblPlaylist = new JLabel("Playlists");
-	
+	public static final int NUMBER_ROW_NOT_TO_COUNT =1;
 
-	private List<Integer> listNotEditable = new ArrayList<>();
 	private MainController controller;
 	private JPopupMenu popMenuPlaylist = new JPopupMenu();
 	private JMenuItem remove = new JMenuItem("Rimuovi");
@@ -42,7 +43,7 @@ public class WestPanel extends JPanel {
 	
 
 	private Vector<String> column = new Vector<>();
-	int rowSelected;
+	private int rowSelected;
 
 
 	/**
@@ -53,10 +54,8 @@ public class WestPanel extends JPanel {
 
 
 		westMenuTable = new JTable();
-		List<Playlist> listPlaylist = new ArrayList<>();
-		listPlaylist =controller.getAllPlaylists();
 		
-		westTableModel = new WestTableModel(column, listPlaylist, controller.getQueue());
+		westTableModel = new WestTableModel(column, controller);
 		
 		column.add("West Menu");
 		westTableModel.setColumnNames(column);
@@ -78,13 +77,16 @@ public class WestPanel extends JPanel {
 		 * westMenuTable propertis
 		 */
 		scrollPane.setPreferredSize(di);
-		westMenuTable.setRowHeight(30);
+		westMenuTable.setRowHeight(35);
 		westMenuTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		westMenuTable.setFont(new Font("Kokonor", Font.PLAIN, 16));
+		westMenuTable.setFont(new Font("Kokonor", Font.PLAIN, 18));
 
 
+		
+		/**
+		 * jmenu item  remove 
+		 */
 		remove.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(rowSelected==0){
@@ -93,7 +95,8 @@ public class WestPanel extends JPanel {
 							    "Warning",JOptionPane.WARNING_MESSAGE);
 				}
 				else{
-					controller.removePlaylist(controller.getAllPlaylists().get(rowSelected-1).getId(), rowSelected-1);
+					controller.removePlaylist(controller.getLibraryManager().getAllPlaylists().get(rowSelected-NUMBER_ROW_NOT_TO_COUNT).getId(), 
+																														rowSelected-NUMBER_ROW_NOT_TO_COUNT);
 				}
 			}
 		});
@@ -105,29 +108,35 @@ public class WestPanel extends JPanel {
 
 				JTable source = (JTable) e.getSource();
 				rowSelected = source.rowAtPoint(e.getPoint());
+				
 				int column = source.columnAtPoint(e.getPoint());
 
 				if (!source.isRowSelected(rowSelected))
 					source.changeSelection(rowSelected, column, false, false);
 				switch(rowSelected){
+				
 				case 0:
+					
 					controller.onQueueSelected();
 					break;
 				default:
 				{
-					controller.onPlaylistSelected(controller.getAllPlaylists().get(rowSelected-1).getId());
+					controller.onPlaylistSelected(controller.getLibraryManager().getAllPlaylists().get(rowSelected-NUMBER_ROW_NOT_TO_COUNT).getId());
 				}
 				}
-				System.out.println(e.getClickCount());
 				if(SwingUtilities.isRightMouseButton(e)){
 					popMenuPlaylist.show(e.getComponent(), e.getX(), e.getY());
 				}
 			}
 		});
 		this.add(scrollPane);
-		System.out.println(rowSelected);
+		
 	}
-	public void changeModel(){
-		westTableModel.refresh(controller.getAllPlaylists(),controller.getQueue());
+	public void refreshWestTable(){
+		westTableModel.refresh(controller.getLibraryManager().getAllPlaylists(),controller.getLibraryManager().getQueue());
 	}
+	public void setQueSelected(){
+		westMenuTable.addRowSelectionInterval(0, 0);
+	}
+
 }

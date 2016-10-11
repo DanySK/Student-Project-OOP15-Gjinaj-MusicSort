@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -12,12 +13,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.filechooser.FileFilter;
 
 import controller.MainController;
-import controller.MusicControllerInterface;
+import util.ProgressBarThread;
 public class SouthPanel extends JPanel{
 
 	/**
@@ -32,7 +34,7 @@ public class SouthPanel extends JPanel{
 	private JLabel labelTimeCounter = new JLabel("-:-:-");
 	private JLabel labelDuration = new JLabel("-:-:-");
 	private JPanel sEstPanel = new JPanel();
-	private MusicControllerInterface controller;
+	private MainController controller;
 	private JSlider progressSlider = new JSlider();
 	
 
@@ -140,9 +142,12 @@ public class SouthPanel extends JPanel{
 						audioFilePath = fileChooser.getSelectedFile().getAbsolutePath();
 						System.out.println(audioFilePath);
 						controller.openTrack(audioFilePath);
+				
 						buttonPlay.setIcon(iconPause);
+						//controller.onPlaylistSelected(controller.getQueue().getId());
 					}
 					
+				
 				}  
 				if (button == buttonPlay) {
 					if(button.getIcon()==iconPlay)
@@ -162,10 +167,26 @@ public class SouthPanel extends JPanel{
 					}
 				}
 				if(button == buttonNext) {
-					controller.nextTrack();
+					
+					if(!controller.getLibraryManager().canPlayNext()){
+						JOptionPane.showMessageDialog(new Frame(),
+								"non ci sono canzoni da produrre.",
+							    "Warning",JOptionPane.WARNING_MESSAGE);
+					}
+					else{
+						controller.nextTrack();
+					}
 				} 
 				if(button == buttonBack) {
-					controller.previuosTrack();
+					
+					if(!controller.getLibraryManager().canPlayNext()){
+						JOptionPane.showMessageDialog(new Frame(),
+								"non ci sono canzoni da produrre.",
+							    "Warning",JOptionPane.WARNING_MESSAGE);
+					}
+					else{
+						controller.previuosTrack();
+					}
 				} 
 			}
 		}
@@ -185,10 +206,19 @@ public class SouthPanel extends JPanel{
 		this.buttonBack.setEnabled(true);
 	}
 	
+	public void DisableButtons() {
+		this.buttonPlay.setEnabled(false);
+		this.buttonNext.setEnabled(false);
+		this.buttonBack.setEnabled(false);
+	}
+	
 	public void Stop(){
-		 labelFileReproducing.setText("Song Deleted, Play new song");
+			barThread.setPaused(true);
+		 labelFileReproducing.setText("No Song To Play, Start a new one");
 		 labelTimeCounter = new JLabel("-:-:-");
 		 labelDuration = new JLabel("-:-:-");
 		 this.buttonPlay.setIcon(iconPlay);
+		
 	}
+
 }

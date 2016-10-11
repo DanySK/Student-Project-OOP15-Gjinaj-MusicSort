@@ -1,8 +1,10 @@
 package model;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+
 
 import util.FileHelper;
 /**
@@ -16,14 +18,21 @@ public class LibraryManager {
 	 * @return userPlaylists List<Playlist>
 	 */
 	private List<Playlist> userPlaylists = new ArrayList<Playlist>();
-	
 	private SongQueue songQueue;
+	private IPlaylist playlistToShow;
+	private IPlaylist reproducingPlaylist;
+	private ReproducingSong reproducingSong;
+	private boolean canPlayNext= true;
+	
 	/**
 	 * currentPlaylist is teh playlist that i'm playing now
 	 */
-	private IPlaylist currentPlaylist;
-	private CurrentSong currentSong;
-	private static final String PLAYLISTS_FOLDER = "res/playlists";
+	
+	private String PLAYLISTS_FOLDER = "";
+	
+	
+	
+	
 	private static final String PLAYLIST_EXTENSION = ".msort";
 	private static final String QUEUE_EXTENSION = ".queue";
 	/**
@@ -31,13 +40,33 @@ public class LibraryManager {
 	 */
 	public LibraryManager(){
 		songQueue = SongQueue.getInstance();
+		File fileP=null;
+		String path= "";
+		try {
+			fileP =  new File(main.Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
+			
+			fileP = new File(System.getProperty("java.class.path"));
+			File dir = fileP.getAbsoluteFile().getParentFile();
+		    path = dir.toString()+"/res/playlists";
+		} catch (URISyntaxException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		File directory = new File(String.valueOf(path));
+		if(!directory.exists()){
+			directory.mkdirs();
+			System.out.println("esiste");
+		}
+		this.PLAYLISTS_FOLDER=directory.toString();
+		System.out.println(directory+"this si my path");
 		loadTracks();
 	}
 	/** 
 	 * get Playlist Folder
 	 * @return String
 	 */
-	public static String getPlaylistsFolder() {
+	public  String getPlaylistsFolder() {
 		return PLAYLISTS_FOLDER;
 	}
 	
@@ -46,8 +75,10 @@ public class LibraryManager {
 	 * PLAYLISTS_FOLDER is the path where the user save all palylist
 	 */
 	private void loadTracks(){
-		String playListFolderPath = new File(PLAYLISTS_FOLDER).getAbsolutePath();
-		System.out.println(playListFolderPath);
+
+		String playListFolderPath = this.PLAYLISTS_FOLDER;
+		
+		
 		List<IPlaylist> list = FileHelper.loadPlayLists(playListFolderPath, PLAYLIST_EXTENSION, QUEUE_EXTENSION);
 		for(IPlaylist p : list){
 			if(p instanceof SongQueue){
@@ -56,7 +87,7 @@ public class LibraryManager {
 				userPlaylists.add((Playlist)p);
 			}
 		}
-		currentPlaylist = songQueue;
+		reproducingPlaylist = songQueue;
 	}
 	
 	
@@ -82,16 +113,16 @@ public class LibraryManager {
 		return playlist;
 	}
 	
+	
 	/**
 	 * get Song At Position
 	 * @param index
 	 * @return Song
 	 */
-	public Song getSongAtPosition(int index){
-
-		return this.currentPlaylist.getSongsList().get(index);
+	public Song getRepPlaylistSongAt(int index){
+		return this.reproducingPlaylist.getSongsList().get(index);
 	}
-	
+	//--------------------------divider in playlist playing e playlist watching
 	/**
 	 * (not uset yet) rename a playlist name
 	 * @param id
@@ -105,8 +136,8 @@ public class LibraryManager {
 	/**
 	 * sets  queue as current palylist when it needs
 	 */
-	public void setCurrentPlaylistAsQueue(){
-		this.currentPlaylist = this.songQueue;
+	public void setReproducingQueue(){
+		this.reproducingPlaylist = this.songQueue;
 	}
 	
 	/**
@@ -130,7 +161,11 @@ public class LibraryManager {
 	 * @param song
 	 */
 	public void removeSongFromQueue(Song song){
+		
 		this.songQueue.removeSong(song);
+		if(this.getQueue().getId().equals(reproducingPlaylist.getId())&&reproducingPlaylist.size()==0){
+			this.setcanPlayNext(false);
+		}
 	}
 	
 	/**
@@ -140,13 +175,11 @@ public class LibraryManager {
 	public IPlaylist getQueue(){
 		return songQueue;
 	}
-	/**
-	 *  Get all playlists 
-	 * @return List<Playlist>
-	 */
-	public List<Playlist> getAllPlaylists(){
-		return this.userPlaylists;
+	
+	public void setQueueToSHow(){
+		this.playlistToShow=this.songQueue;
 	}
+
 	
 	/**
 	 * Add a song to the playlist by index
@@ -157,12 +190,34 @@ public class LibraryManager {
 		this.userPlaylists.get(playListIndex).addSong(song);
 	}
 	
+	public void removeSongFromPlaylist(IPlaylist p, Song s){
+		this.getPlaylistById(p.getId()).removeSong(s);
+		if(p.getId().equals(reproducingPlaylist.getId())&&reproducingPlaylist.size()==0){
+			this.setcanPlayNext(false);
+		}
+	}
+	
+	public boolean canPlayNext() {
+		return canPlayNext;
+	}
+	public void setcanPlayNext(boolean noNextPrev) {
+		this.canPlayNext = noNextPrev;
+	}
+	/**
+	 *  Get all playlists 
+	 * @return List<Playlist>
+	 */
+	public List<Playlist> getAllPlaylists(){
+		return this.userPlaylists;
+	}
+	
+
 	/**
 	 * set Current playlist is playing using id
 	 * @param id
 	 */
-	public void setCurrentPlaylist(String id){
-		this.currentPlaylist = getPlaylistById(id);
+	public void setReproducingPlaylist(String id){
+		this.reproducingPlaylist = getPlaylistById(id);
 		if(getPlaylistById(id) == null){
 			System.out.println("current playlist null");
 		}
@@ -172,18 +227,37 @@ public class LibraryManager {
 	 * Get is playling
 	 * @return IPlaylist
 	 */
-	public IPlaylist getCurrentPlaylist(){
-		return this.currentPlaylist;
+	public IPlaylist getReproducingPlaylist(){
+		return this.reproducingPlaylist;
 	}
 	
+	
+	/**
+	 * set Current playlist is to show using id
+	 * @param id
+	 */
+	public void setPlaylistToShow(String id){
+		this.playlistToShow = getPlaylistById(id);
+		if(getPlaylistById(id) == null){
+			System.out.println("current playlist null");
+		}
+	}
+	
+	/**
+	 * Get is playling
+	 * @return IPlaylist
+	 */
+	public IPlaylist getShowPlaylist(){
+		return this.playlistToShow;
+	}
 	
 	
 	/**
 	 * set current song playing buy index
 	 * @param index
 	 */
-	public void setCurrentSong(int index){
-		this.currentSong = new CurrentSong(getSongAtPosition(index), index);
+	public void setReproducingSong(int index){
+		this.reproducingSong = new ReproducingSong(getRepPlaylistSongAt(index), index);
 	}
 	
 	/**
@@ -204,8 +278,12 @@ public class LibraryManager {
 	 * get current song is playing 
 	 * @return Song
 	 */
-	public Song getCurrentSong(){
-		return this.currentSong.song;
+	public Song getReproducingSong(){
+		return this.reproducingSong.song;
+	}
+	
+	public int reproducingSongPosInPlaylist(){
+		return this.reproducingSong.getPositionInPlaylist();
 	}
 
 	/**
@@ -221,24 +299,30 @@ public class LibraryManager {
 	 * @return Song
 	 */
 	public Song getNextSong(){
-		int playListLength = currentPlaylist.size();
-		if(currentSong == null){
+		int playListLength = reproducingPlaylist.size();
+		if(reproducingSong == null){
 			log("null");
 		}
-		Song nextSongToBePlayed = currentPlaylist.getSongsList().get((currentSong.getPositionInPlaylist()+1)%playListLength);
-		currentSong.update(nextSongToBePlayed, currentSong.getPositionInPlaylist()+1);
+		Song nextSongToBePlayed = reproducingPlaylist.getSongsList().get((reproducingSong.getPositionInPlaylist()+1)%playListLength);
+		reproducingSong.update(nextSongToBePlayed, ((reproducingSong.getPositionInPlaylist()+1)%playListLength));
 		return nextSongToBePlayed;
 	}
 	/**
-	 * get the previous SOng
+	 * get the previous Song
 	 * @return Song
 	 */
 	public Song getPreviousSong(){
-		int playListLength = currentPlaylist.size();
-		int nextSongToBePlayedIndex = (currentSong.getPositionInPlaylist()-1) == -1 ? 
-				playListLength-1 : currentSong.getPositionInPlaylist()-1;
-		Song nextSongToBePlayed = currentPlaylist.getSongsList().get(nextSongToBePlayedIndex);
-		currentSong.update(nextSongToBePlayed, nextSongToBePlayedIndex);
+		
+		int playListLength = reproducingPlaylist.size();
+		int nextSongToBePlayedIndex=reproducingSong.getPositionInPlaylist();
+		if(nextSongToBePlayedIndex-1 == -1){
+			nextSongToBePlayedIndex=playListLength-1;
+		}else
+		{
+			nextSongToBePlayedIndex=reproducingSong.getPositionInPlaylist()-1;
+		}
+		Song nextSongToBePlayed = reproducingPlaylist.getSongsList().get((nextSongToBePlayedIndex));
+		reproducingSong.update(nextSongToBePlayed,  nextSongToBePlayedIndex);
 		return nextSongToBePlayed;
 	}
 	
@@ -247,7 +331,7 @@ public class LibraryManager {
 	 * @author rrok
 	 *
 	 */
-	private class CurrentSong{
+	private class ReproducingSong{
 		private Song song;
 		private int positionInPlaylist;
 
@@ -256,7 +340,7 @@ public class LibraryManager {
 		 * @param song
 		 * @param positionInPlaylist
 		 */
-		public CurrentSong(Song song, int positionInPlaylist){
+		public ReproducingSong(Song song, int positionInPlaylist){
 			this.song = song;
 			this.positionInPlaylist = positionInPlaylist;
 		}

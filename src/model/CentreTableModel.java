@@ -155,7 +155,8 @@ public class CentreTableModel extends AbstractTableModel {
 	 */
 	public void removeSong(int row){
 	    playlist.removeSong(row);
-	    fireTableRowsDeleted(getRowCount(), getRowCount());
+	    fireTableRowsDeleted(row, row);
+	    
 	}
 
 	/**

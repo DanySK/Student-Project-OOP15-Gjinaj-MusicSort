@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -12,7 +13,7 @@ import javax.swing.ListSelectionModel;
 import controller.MainController;
 import model.IPlaylist;
 import model.CentreTableModel;
-import view.PopUpDemo;
+import view.RightClickCentreTable;
 
 /**
  * 
@@ -24,16 +25,18 @@ public class CentrePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTable showSongJTable;
 	private CentreTableModel centreTableModel;
+	private int rowSelected;
 	
 	public CentrePanel(MainController controller) {
 		JScrollPane scrollPaneShowSongs = new JScrollPane();
-		this.add(scrollPaneShowSongs, "name_9428167759486");
+		this.add(scrollPaneShowSongs, "");
 
 		centreTableModel = new CentreTableModel();
 		
 		
 		showSongJTable = new JTable();
-		
+		showSongJTable.setRowHeight(35);
+		showSongJTable.setFont(new Font("Kokonor", Font.PLAIN, 16));
 		Vector<String> columnNameS = new Vector<String>();
         columnNameS.add("Artist");
         columnNameS.add("Title");
@@ -44,23 +47,22 @@ public class CentrePanel extends JPanel {
 		showSongJTable.setModel(centreTableModel);
 		showSongJTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-		scrollPaneShowSongs.setViewportView(showSongJTable);
+		scrollPaneShowSongs.setViewportView(showSongJTable);	
+		
 		showSongJTable.addMouseListener(new MouseAdapter(){
 			
-			private int rowSelected;
 
 			@Override
 			public void mousePressed(MouseEvent e){
 		        if (e.isPopupTrigger()){
-		            doPop(e);
-		            
 		            JTable source = (JTable)e.getSource();
-		            int row = source.rowAtPoint( e.getPoint() );
+		            rowSelected = source.rowAtPoint( e.getPoint() );
 		            int column = source.columnAtPoint( e.getPoint() );
-
-		            if (! source.isRowSelected(row))
-		                source.changeSelection(row, column, false, false);
-		            //System.out.println("riga numero "+row+" "+"colonna numero:"+ column);
+		            
+		            if (! source.isRowSelected(rowSelected))
+		                source.changeSelection(rowSelected, column, false, false);
+		            System.out.println("riga numero "+rowSelected+" "+"colonna numero:"+ column);
+		            doPop(e);
 		        }
 		    }
 
@@ -72,7 +74,7 @@ public class CentrePanel extends JPanel {
 		    }
 
 		    private void doPop(MouseEvent e){
-		        PopUpDemo menu = new PopUpDemo(controller ,rowSelected);
+		        RightClickCentreTable menu = new RightClickCentreTable(controller,controller.getSongPosShowPlaylist(rowSelected));
 		        menu.show(e.getComponent(), e.getX(), e.getY());
 		    }
 
@@ -81,29 +83,23 @@ public class CentrePanel extends JPanel {
 		     // TODO Auto-generated method stub
 		     super.mouseClicked(e);
 		     JTable source = (JTable)e.getSource();
-	            int row = source.rowAtPoint( e.getPoint() );
+	            rowSelected = source.rowAtPoint( e.getPoint() );
 	            int column = source.columnAtPoint( e.getPoint() );
-		     
 	            if(e.getClickCount()==2){
-		      
-		            controller.onSongSelected(row);
-		            controller.startBarThread();
-		            if (! source.isRowSelected(row))
-		                source.changeSelection(row, column, false, false);
-		            //System.out.println("doppio click in riga numero "+row+" "+"colonna numero:"+ column);
-		            controller.setPauseIcon();
-		            if(controller.getProgressBar()!=null) {
-						controller.getProgressBar();
-						controller.getProgressBar().cleanBarData();
-					} else
-		            	controller.startBarThread();
+	            	//se clicco due volte
+		            if (!source.isRowSelected(rowSelected))
+		                source.changeSelection(rowSelected, column, false, false);
+		            controller.onSongDoubleClick(rowSelected);
 		     }
-		     else {
-				rowSelected = row;
-			}
+	            
 		    }
 		});
 		this.setLayout(new GridBagLayout());
+	}
+	
+	public void setTableSongSelected(int index0) {
+		// TODO Auto-generated method stub
+		showSongJTable.setRowSelectionInterval(index0, index0);
 	}
 	
 	public void changeModel(IPlaylist playlist){

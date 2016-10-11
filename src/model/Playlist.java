@@ -4,6 +4,7 @@ import java.rmi.server.UID;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * 
  * @author rrok
@@ -78,6 +79,11 @@ public class Playlist implements IPlaylist{
 	@Override
 	public void removeSong(int index) {
 		this.songsList.remove(index);
+		this.status = Status.UPDATED;
+	}
+	
+	public void removeSong(Song song) {
+		songsList.remove(song);
 		this.status = Status.UPDATED;
 	}
 
