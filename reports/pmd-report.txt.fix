@@ -1,0 +1,462 @@
+Violated encapsulation: 15
+src/util/ProgressBarThread.java:16:	Use explicit scoping instead of the default package private level
+src/util/ProgressBarThread.java:17:	Use explicit scoping instead of the default package private level
+src/view/MainView.java:19:	Use explicit scoping instead of the default package private level
+src/view/MainView.java:20:	Use explicit scoping instead of the default package private level
+src/view/MainView.java:21:	Use explicit scoping instead of the default package private level
+src/view/NorthPanel.java:34:	Use explicit scoping instead of the default package private level
+src/view/NorthPanel.java:35:	Use explicit scoping instead of the default package private level
+src/view/NorthPanel.java:36:	Use explicit scoping instead of the default package private level
+src/view/NorthPanel.java:37:	Use explicit scoping instead of the default package private level
+src/view/NorthPanel.java:38:	Use explicit scoping instead of the default package private level
+src/view/RightClickCentreTable.java:24:	Use explicit scoping instead of the default package private level
+src/view/RightClickCentreTable.java:25:	Use explicit scoping instead of the default package private level
+src/view/RightClickCentreTable.java:27:	Use explicit scoping instead of the default package private level
+src/view/RightClickCentreTable.java:61:	Use explicit scoping instead of the default package private level
+src/view/SouthPanel.java:110:	Use explicit scoping instead of the default package private level
+
+Poor design: 17
+src/controller/MainController.java:33:	Avoid unused private fields such as 'view'.
+src/controller/MainController.java:33:	Perhaps 'view' could be replaced by a local variable.
+src/main/Main.java:11:	All methods are static.  Consider using a utility class instead. Alternatively, you could add a private constructor or make the class abstract to silence this warning.
+src/model/CentreTableModel.java:15:	Avoid unused private fields such as 'columnsVisible'.
+src/model/CentreTableModel.java:15:	Perhaps 'columnsVisible' could be replaced by a local variable.
+src/model/LibraryManager.java:31:	The field name indicates a constant but its modifiers do not
+src/model/MpegInfo.java:251:	Avoid unused private methods such as 'loadShoutastInfo(AudioFileFormat)'.
+src/model/SongQueue.java:13:	A class which only has private constructors should be final
+src/util/FileHelper.java:20:	All methods are static.  Consider using a utility class instead. Alternatively, you could add a private constructor or make the class abstract to silence this warning.
+src/util/FileHelper.java:89:	Rather than using a lot of String arguments, consider using a container object for those values.
+src/util/Mp3Player.java:18:	A class which only has private constructors should be final
+src/util/Mp3Player.java:23:	The field name indicates a constant but its modifiers do not
+src/util/Mp3Player.java:36:	Singleton is not thread safe
+src/util/SongBuilder.java:8:	All methods are static.  Consider using a utility class instead. Alternatively, you could add a private constructor or make the class abstract to silence this warning.
+src/view/MainView.java:14:	Perhaps 'frmMusicsort' could be replaced by a local variable.
+src/view/SouthPanel.java:34:	The String literal "-:-:-" appears 4 times in this file; the first occurrence is on line 34
+src/view/WestPanel.java:42:	Perhaps 'di' could be replaced by a local variable.
+
+Very bad code practices and potential bugs: 7
+src/model/Playlist.java:25:	Overridable method 'toString' called during object construction
+src/model/Playlist.java:37:	Overridable method 'toString' called during object construction
+src/model/Song.java:16:	Overridable method 'toString' called during object construction
+src/view/SouthPanel.java:119:	Use equals() to compare object references.
+src/view/SouthPanel.java:152:	Use equals() to compare object references.
+src/view/SouthPanel.java:169:	Use equals() to compare object references.
+src/view/SouthPanel.java:180:	Use equals() to compare object references.
+
+Bad exception handling: 2
+src/model/MpegInfo.java:235:	Avoid empty catch blocks
+src/util/PositionSongThread.java:35:	Avoid empty catch blocks
+
+Portability issues: 0
+
+Bad naming: 22
+src/controller/MusicControllerInterface.java:61:	Avoid modifiers which are implied by the context
+src/controller/MusicControllerInterface.java:67:	Avoid modifiers which are implied by the context
+src/model/IPlaylist.java:24:	Avoid modifiers which are implied by the context
+src/model/IPlaylist.java:30:	Avoid modifiers which are implied by the context
+src/model/IPlaylist.java:36:	Avoid modifiers which are implied by the context
+src/model/IPlaylist.java:42:	Avoid modifiers which are implied by the context
+src/model/IPlaylist.java:48:	Avoid modifiers which are implied by the context
+src/model/IPlaylist.java:54:	Avoid modifiers which are implied by the context
+src/model/IPlaylist.java:60:	Avoid modifiers which are implied by the context
+src/model/IPlaylist.java:66:	Avoid modifiers which are implied by the context
+src/model/LibraryManager.java:25:	Field canPlayNext has the same name as a method
+src/model/MpegInfo.java:276:	A getX() method which returns a boolean should be named isX()
+src/model/MpegInfo.java:292:	A getX() method which returns a boolean should be named isX()
+src/model/MpegInfo.java:296:	A getX() method which returns a boolean should be named isX()
+src/model/MpegInfo.java:300:	A getX() method which returns a boolean should be named isX()
+src/model/SongQueue.java:15:	It is somewhat confusing to have a field name matching the declaring class name
+src/util/IPlayer.java:14:	Avoid modifiers which are implied by the context
+src/util/IPlayer.java:19:	Avoid modifiers which are implied by the context
+src/util/IPlayer.java:23:	Avoid modifiers which are implied by the context
+src/util/Mp3Player.java:20:	It is somewhat confusing to have a field name matching the declaring class name
+src/view/SouthPanel.java:63:	Unnecessary use of fully qualified name 'java.awt.Image.SCALE_SMOOTH' due to existing import 'java.awt.Image'
+src/view/SouthPanel.java:67:	Unnecessary use of fully qualified name 'java.awt.Image.SCALE_SMOOTH' due to existing import 'java.awt.Image'
+
+Bad code practices: 33
+src/controller/MainController.java:20:	No need to import a type that lives in the same package
+src/controller/MainController.java:239:	These nested if statements could be combined
+src/controller/MainController.java:239:	These nested if statements could be combined
+src/controller/MainController.java:305:	Avoid using if statements without curly braces
+src/controller/MainController.java:305:	Avoid using if statements without curly braces
+src/controller/MainController.java:314:	Avoid using if statements without curly braces
+src/controller/MainController.java:314:	Avoid using if statements without curly braces
+src/model/CentreTableModel.java:14:	Avoid using implementation types like 'Vector'; use the interface instead
+src/model/CentreTableModel.java:45:	Avoid using implementation types like 'Vector'; use the interface instead
+src/model/CentreTableModel.java:62:	Avoid using implementation types like 'Vector'; use the interface instead
+src/model/MpegInfo.java:387:	Avoid using if statements without curly braces
+src/model/MpegInfo.java:387:	Avoid using if statements without curly braces
+src/model/WestTableModel.java:15:	Avoid using implementation types like 'Vector'; use the interface instead
+src/model/WestTableModel.java:19:	Avoid using implementation types like 'Vector'; use the interface instead
+src/model/WestTableModel.java:25:	An empty statement (semicolon) not part of a loop
+src/model/WestTableModel.java:43:	Avoid using implementation types like 'Vector'; use the interface instead
+src/util/PositionSongThread.java:32:	Avoid using if statements without curly braces
+src/util/PositionSongThread.java:32:	Avoid using if statements without curly braces
+src/view/CentrePanel.java:16:	No need to import a type that lives in the same package
+src/view/CentrePanel.java:62:	Avoid using if statements without curly braces
+src/view/CentrePanel.java:62:	Avoid using if statements without curly braces
+src/view/CentrePanel.java:90:	Avoid using if statements without curly braces
+src/view/CentrePanel.java:90:	Avoid using if statements without curly braces
+src/view/MainView.java:9:	No need to import a type that lives in the same package
+src/view/WestPanel.java:10:	Avoid unused imports such as 'java.util.ArrayList'
+src/view/WestPanel.java:11:	Avoid unused imports such as 'java.util.List'
+src/view/WestPanel.java:14:	Avoid unused imports such as 'javax.swing.JLabel'
+src/view/WestPanel.java:23:	Avoid unused imports such as 'javax.swing.event.TableModelEvent'
+src/view/WestPanel.java:24:	Avoid unused imports such as 'javax.swing.event.TableModelListener'
+src/view/WestPanel.java:27:	Avoid unused imports such as 'model.Playlist'
+src/view/WestPanel.java:45:	Avoid using implementation types like 'Vector'; use the interface instead
+src/view/WestPanel.java:114:	Avoid using if statements without curly braces
+src/view/WestPanel.java:114:	Avoid using if statements without curly braces
+
+Use modern Java: 10
+src/model/CentreTableModel.java:14:	Consider replacing this Vector with the newer java.util.List
+src/model/CentreTableModel.java:45:	Consider replacing this Vector with the newer java.util.List
+src/model/CentreTableModel.java:62:	Consider replacing this Vector with the newer java.util.List
+src/model/WestTableModel.java:15:	Consider replacing this Vector with the newer java.util.List
+src/model/WestTableModel.java:19:	Consider replacing this Vector with the newer java.util.List
+src/model/WestTableModel.java:43:	Consider replacing this Vector with the newer java.util.List
+src/view/CentrePanel.java:40:	Consider replacing this Vector with the newer java.util.List
+src/view/CentrePanel.java:40:	Use ArrayList instead of Vector
+src/view/WestPanel.java:45:	Consider replacing this Vector with the newer java.util.List
+src/view/WestPanel.java:45:	Use ArrayList instead of Vector
+
+Performance and resource waste: 28
+src/controller/MainController.java:39:	Avoid using redundant field initializer for 'started'
+src/controller/MainController.java:456:	Consider simply returning the value vs storing it in local variable 'ints'
+src/model/MpegInfo.java:46:	Avoid using redundant field initializer for 'channelsMode'
+src/model/MpegInfo.java:47:	Avoid using redundant field initializer for 'version'
+src/model/MpegInfo.java:48:	Avoid using redundant field initializer for 'rate'
+src/model/MpegInfo.java:49:	Avoid using redundant field initializer for 'layer'
+src/model/MpegInfo.java:50:	Avoid using redundant field initializer for 'emphasis'
+src/model/MpegInfo.java:51:	Avoid using redundant field initializer for 'nominalbitrate'
+src/model/MpegInfo.java:52:	Avoid using redundant field initializer for 'total'
+src/model/MpegInfo.java:53:	Avoid using redundant field initializer for 'location'
+src/model/MpegInfo.java:54:	Avoid using redundant field initializer for 'size'
+src/model/MpegInfo.java:55:	Avoid using redundant field initializer for 'copyright'
+src/model/MpegInfo.java:56:	Avoid using redundant field initializer for 'crc'
+src/model/MpegInfo.java:57:	Avoid using redundant field initializer for 'original'
+src/model/MpegInfo.java:58:	Avoid using redundant field initializer for 'vbr'
+src/model/MpegInfo.java:60:	Avoid using redundant field initializer for 'year'
+src/model/MpegInfo.java:61:	Avoid using redundant field initializer for 'genre'
+src/model/MpegInfo.java:62:	Avoid using redundant field initializer for 'title'
+src/model/MpegInfo.java:63:	Avoid using redundant field initializer for 'artist'
+src/model/MpegInfo.java:64:	Avoid using redundant field initializer for 'album'
+src/model/WestTableModel.java:62:	A switch with less than three branches is inefficient, use a if statement instead.
+src/model/WestTableModel.java:86:	Consider simply returning the value vs storing it in local variable 'pName'
+src/util/PositionSongThread.java:11:	Avoid using redundant field initializer for 'sec'
+src/util/ProgressBarThread.java:16:	Avoid using redundant field initializer for 'min'
+src/util/ProgressBarThread.java:17:	Avoid using redundant field initializer for 'h'
+src/view/SouthPanel.java:55:	Avoid using redundant field initializer for 'barThread'
+src/view/WestPanel.java:34:	Avoid using redundant field initializer for 'westTableModel'
+src/view/WestPanel.java:116:	A switch with less than three branches is inefficient, use a if statement instead.
+
+Potentially dangerous side effects: 0
+
+Use final: 283
+src/controller/MainController.java:28:	Private field 'mp3Info' could be made final; it is only initialized in the declaration or constructor.
+src/controller/MainController.java:30:	Private field 'mp3Player' could be made final; it is only initialized in the declaration or constructor.
+src/controller/MainController.java:31:	Private field 'libraryManager' could be made final; it is only initialized in the declaration or constructor.
+src/controller/MainController.java:44:	Parameter 'started' is not assigned and could be declared final
+src/controller/MainController.java:53:	Parameter 'libraryManager' is not assigned and could be declared final
+src/controller/MainController.java:65:	Parameter 'view' is not assigned and could be declared final
+src/controller/MainController.java:78:	Parameter 'id' is not assigned and could be declared final
+src/controller/MainController.java:87:	Parameter 'index' is not assigned and could be declared final
+src/controller/MainController.java:99:	Parameter 'index' is not assigned and could be declared final
+src/controller/MainController.java:107:	Parameter 'playlist' is not assigned and could be declared final
+src/controller/MainController.java:142:	Local variable 'song' could be declared final
+src/controller/MainController.java:163:	Parameter 'index' is not assigned and could be declared final
+src/controller/MainController.java:175:	Local variable 'song' could be declared final
+src/controller/MainController.java:190:	Parameter 'audioFilePath' is not assigned and could be declared final
+src/controller/MainController.java:220:	Local variable 'nextSongPath' could be declared final
+src/controller/MainController.java:250:	Parameter 'id' is not assigned and could be declared final
+src/controller/MainController.java:250:	Parameter 'name' is not assigned and could be declared final
+src/controller/MainController.java:266:	Parameter 'name' is not assigned and could be declared final
+src/controller/MainController.java:267:	Local variable 'p' could be declared final
+src/controller/MainController.java:311:	Parameter 'index0' is not assigned and could be declared final
+src/controller/MainController.java:326:	Local variable 'names' could be declared final
+src/controller/MainController.java:348:	Parameter 'id' is not assigned and could be declared final
+src/controller/MainController.java:348:	Parameter 'index' is not assigned and could be declared final
+src/controller/MainController.java:400:	Local variable 'totSec' could be declared final
+src/controller/MainController.java:405:	Parameter 'status' is not assigned and could be declared final
+src/controller/MainController.java:446:	Parameter 'i' is not assigned and could be declared final
+src/controller/MainController.java:448:	Local variable 'Val' could be declared final
+src/controller/MainController.java:449:	Local variable 'hours' could be declared final
+src/controller/MainController.java:451:	Local variable 'mins' could be declared final
+src/controller/MainController.java:453:	Local variable 'secs' could be declared final
+src/controller/MainController.java:455:	Local variable 'ints' could be declared final
+src/main/Main.java:12:	Parameter 'args' is not assigned and could be declared final
+src/main/Main.java:14:	Local variable 'libraryManager' could be declared final
+src/main/Main.java:15:	Local variable 'controller' could be declared final
+src/main/Main.java:16:	Local variable 'window' could be declared final
+src/model/CentreTableModel.java:22:	Parameter 'column' is not assigned and could be declared final
+src/model/CentreTableModel.java:22:	Parameter 'row' is not assigned and could be declared final
+src/model/CentreTableModel.java:36:	Parameter 'playlist' is not assigned and could be declared final
+src/model/CentreTableModel.java:45:	Parameter 'colnames' is not assigned and could be declared final
+src/model/CentreTableModel.java:45:	Parameter 'playlist' is not assigned and could be declared final
+src/model/CentreTableModel.java:62:	Parameter 'colNames' is not assigned and could be declared final
+src/model/CentreTableModel.java:78:	Parameter 'colNum' is not assigned and could be declared final
+src/model/CentreTableModel.java:95:	Parameter 'colNum' is not assigned and could be declared final
+src/model/CentreTableModel.java:113:	Parameter 'col' is not assigned and could be declared final
+src/model/CentreTableModel.java:113:	Parameter 'row' is not assigned and could be declared final
+src/model/CentreTableModel.java:115:	Local variable 'song' could be declared final
+src/model/CentreTableModel.java:132:	Parameter 'col' is not assigned and could be declared final
+src/model/CentreTableModel.java:132:	Parameter 'newVal' is not assigned and could be declared final
+src/model/CentreTableModel.java:132:	Parameter 'row' is not assigned and could be declared final
+src/model/CentreTableModel.java:141:	Parameter 'row' is not assigned and could be declared final
+src/model/CentreTableModel.java:148:	Parameter 'song' is not assigned and could be declared final
+src/model/CentreTableModel.java:156:	Parameter 'row' is not assigned and could be declared final
+src/model/CentreTableModel.java:167:	Parameter 'index' is not assigned and could be declared final
+src/model/CentreTableModel.java:167:	Parameter 'visible' is not assigned and could be declared final
+src/model/CentreTableModel.java:175:	Parameter 'playlist' is not assigned and could be declared final
+src/model/LibraryManager.java:20:	Private field 'userPlaylists' could be made final; it is only initialized in the declaration or constructor.
+src/model/LibraryManager.java:31:	Private field 'PLAYLISTS_FOLDER' could be made final; it is only initialized in the declaration or constructor.
+src/model/LibraryManager.java:49:	Local variable 'dir' could be declared final
+src/model/LibraryManager.java:56:	Local variable 'directory' could be declared final
+src/model/LibraryManager.java:79:	Local variable 'playListFolderPath' could be declared final
+src/model/LibraryManager.java:82:	Local variable 'list' could be declared final
+src/model/LibraryManager.java:83:	Local variable 'p' could be declared final
+src/model/LibraryManager.java:100:	Local variable 'p' could be declared final
+src/model/LibraryManager.java:110:	Parameter 'name' is not assigned and could be declared final
+src/model/LibraryManager.java:111:	Local variable 'playlist' could be declared final
+src/model/LibraryManager.java:122:	Parameter 'index' is not assigned and could be declared final
+src/model/LibraryManager.java:131:	Parameter 'id' is not assigned and could be declared final
+src/model/LibraryManager.java:131:	Parameter 'name' is not assigned and could be declared final
+src/model/LibraryManager.java:147:	Parameter 'id' is not assigned and could be declared final
+src/model/LibraryManager.java:147:	Parameter 'index' is not assigned and could be declared final
+src/model/LibraryManager.java:153:	Parameter 'song' is not assigned and could be declared final
+src/model/LibraryManager.java:163:	Parameter 'song' is not assigned and could be declared final
+src/model/LibraryManager.java:189:	Parameter 'playListIndex' is not assigned and could be declared final
+src/model/LibraryManager.java:189:	Parameter 'song' is not assigned and could be declared final
+src/model/LibraryManager.java:193:	Parameter 'p' is not assigned and could be declared final
+src/model/LibraryManager.java:193:	Parameter 's' is not assigned and could be declared final
+src/model/LibraryManager.java:203:	Parameter 'noNextPrev' is not assigned and could be declared final
+src/model/LibraryManager.java:219:	Parameter 'id' is not assigned and could be declared final
+src/model/LibraryManager.java:239:	Parameter 'id' is not assigned and could be declared final
+src/model/LibraryManager.java:259:	Parameter 'index' is not assigned and could be declared final
+src/model/LibraryManager.java:268:	Parameter 'id' is not assigned and could be declared final
+src/model/LibraryManager.java:269:	Local variable 'p' could be declared final
+src/model/LibraryManager.java:293:	Parameter 'mes' is not assigned and could be declared final
+src/model/LibraryManager.java:302:	Local variable 'playListLength' could be declared final
+src/model/LibraryManager.java:306:	Local variable 'nextSongToBePlayed' could be declared final
+src/model/LibraryManager.java:316:	Local variable 'playListLength' could be declared final
+src/model/LibraryManager.java:324:	Local variable 'nextSongToBePlayed' could be declared final
+src/model/LibraryManager.java:343:	Parameter 'positionInPlaylist' is not assigned and could be declared final
+src/model/LibraryManager.java:343:	Parameter 'song' is not assigned and could be declared final
+src/model/LibraryManager.java:352:	Parameter 'positionInPlaylist' is not assigned and could be declared final
+src/model/LibraryManager.java:352:	Parameter 'song' is not assigned and could be declared final
+src/model/MpegInfo.java:264:	Local variable 'value' could be declared final
+src/model/Playlist.java:15:	Private field 'id' could be made final; it is only initialized in the declaration or constructor.
+src/model/Playlist.java:16:	Private field 'songsList' could be made final; it is only initialized in the declaration or constructor.
+src/model/Playlist.java:24:	Parameter 'name' is not assigned and could be declared final
+src/model/Playlist.java:36:	Parameter 'name' is not assigned and could be declared final
+src/model/Playlist.java:36:	Parameter 'status' is not assigned and could be declared final
+src/model/Playlist.java:63:	Parameter 'song' is not assigned and could be declared final
+src/model/Playlist.java:80:	Parameter 'index' is not assigned and could be declared final
+src/model/Playlist.java:85:	Parameter 'song' is not assigned and could be declared final
+src/model/Playlist.java:98:	Parameter 'palylistTitle' is not assigned and could be declared final
+src/model/Playlist.java:117:	Local variable 'song' could be declared final
+src/model/Playlist.java:135:	Parameter 'status' is not assigned and could be declared final
+src/model/Song.java:7:	Private field 'id' could be made final; it is only initialized in the declaration or constructor.
+src/model/Song.java:8:	Private field 'path' could be made final; it is only initialized in the declaration or constructor.
+src/model/Song.java:9:	Private field 'title' could be made final; it is only initialized in the declaration or constructor.
+src/model/Song.java:10:	Private field 'album' could be made final; it is only initialized in the declaration or constructor.
+src/model/Song.java:11:	Private field 'artist' could be made final; it is only initialized in the declaration or constructor.
+src/model/Song.java:12:	Private field 'genre' could be made final; it is only initialized in the declaration or constructor.
+src/model/Song.java:13:	Private field 'duration' could be made final; it is only initialized in the declaration or constructor.
+src/model/Song.java:15:	Parameter 'album' is not assigned and could be declared final
+src/model/Song.java:15:	Parameter 'artist' is not assigned and could be declared final
+src/model/Song.java:15:	Parameter 'duration' is not assigned and could be declared final
+src/model/Song.java:15:	Parameter 'genre' is not assigned and could be declared final
+src/model/Song.java:15:	Parameter 'path' is not assigned and could be declared final
+src/model/Song.java:15:	Parameter 'title' is not assigned and could be declared final
+src/model/SongQueue.java:16:	Private field 'songsList' could be made final; it is only initialized in the declaration or constructor.
+src/model/SongQueue.java:17:	Private field 'id' could be made final; it is only initialized in the declaration or constructor.
+src/model/SongQueue.java:52:	Parameter 'song' is not assigned and could be declared final
+src/model/SongQueue.java:61:	Parameter 'index' is not assigned and could be declared final
+src/model/SongQueue.java:70:	Parameter 'song' is not assigned and could be declared final
+src/model/SongQueue.java:106:	Parameter 'status' is not assigned and could be declared final
+src/model/WestTableModel.java:16:	Private field 'playlists' could be made final; it is only initialized in the declaration or constructor.
+src/model/WestTableModel.java:19:	Parameter 'colnames' is not assigned and could be declared final
+src/model/WestTableModel.java:19:	Parameter 'controller' is not assigned and could be declared final
+src/model/WestTableModel.java:25:	Local variable 'pTitle' could be declared final
+src/model/WestTableModel.java:43:	Parameter 'colNames' is not assigned and could be declared final
+src/model/WestTableModel.java:61:	Parameter 'colNum' is not assigned and could be declared final
+src/model/WestTableModel.java:79:	Parameter 'colNum' is not assigned and could be declared final
+src/model/WestTableModel.java:84:	Parameter 'col' is not assigned and could be declared final
+src/model/WestTableModel.java:84:	Parameter 'row' is not assigned and could be declared final
+src/model/WestTableModel.java:85:	Local variable 'pName' could be declared final
+src/model/WestTableModel.java:88:	Parameter 'columnIndex' is not assigned and could be declared final
+src/model/WestTableModel.java:88:	Parameter 'rowIndex' is not assigned and could be declared final
+src/model/WestTableModel.java:93:	Parameter 'playlists' is not assigned and could be declared final
+src/model/WestTableModel.java:93:	Parameter 'queue' is not assigned and could be declared final
+src/model/WestTableModel.java:97:	Local variable 'p' could be declared final
+src/util/FileHelper.java:27:	Parameter 'path' is not assigned and could be declared final
+src/util/FileHelper.java:48:	Parameter 'path' is not assigned and could be declared final
+src/util/FileHelper.java:48:	Parameter 'playListExtension' is not assigned and could be declared final
+src/util/FileHelper.java:48:	Parameter 'playlist' is not assigned and could be declared final
+src/util/FileHelper.java:52:	Local variable 'filepath' could be declared final
+src/util/FileHelper.java:54:	Local variable 'bw' could be declared final
+src/util/FileHelper.java:56:	Local variable 's' could be declared final
+src/util/FileHelper.java:77:	Parameter 'path' is not assigned and could be declared final
+src/util/FileHelper.java:77:	Parameter 'playListExtension' is not assigned and could be declared final
+src/util/FileHelper.java:77:	Parameter 'playlist' is not assigned and could be declared final
+src/util/FileHelper.java:78:	Local variable 'playlistPath' could be declared final
+src/util/FileHelper.java:89:	Parameter 'newName' is not assigned and could be declared final
+src/util/FileHelper.java:89:	Parameter 'oldName' is not assigned and could be declared final
+src/util/FileHelper.java:89:	Parameter 'path' is not assigned and could be declared final
+src/util/FileHelper.java:89:	Parameter 'playListExtension' is not assigned and could be declared final
+src/util/FileHelper.java:90:	Local variable 'oldPath' could be declared final
+src/util/FileHelper.java:91:	Local variable 'newPath' could be declared final
+src/util/FileHelper.java:92:	Local variable 'oldFile' could be declared final
+src/util/FileHelper.java:93:	Local variable 'newFile' could be declared final
+src/util/FileHelper.java:108:	Parameter 'path' is not assigned and could be declared final
+src/util/FileHelper.java:108:	Parameter 'playListExtension' is not assigned and could be declared final
+src/util/FileHelper.java:108:	Parameter 'queueExtension' is not assigned and could be declared final
+src/util/FileHelper.java:112:	Local variable 'folder' could be declared final
+src/util/FileHelper.java:113:	Local variable 'listOfFiles' could be declared final
+src/util/FileHelper.java:115:	Local variable 'playlists' could be declared final
+src/util/FileHelper.java:127:	Local variable 'file' could be declared final
+src/util/FileHelper.java:132:	Local variable 'playlistName' could be declared final
+src/util/FileHelper.java:140:	Local variable 'song' could be declared final
+src/util/FileHelper.java:154:	Local variable 'playlist' could be declared final
+src/util/FileHelper.java:165:	Parameter 'message' is not assigned and could be declared final
+src/util/Mp3Player.java:21:	Private field 'controllerBasic' could be made final; it is only initialized in the declaration or constructor.
+src/util/Mp3Player.java:22:	Private field 'mp3Controller' could be made final; it is only initialized in the declaration or constructor.
+src/util/Mp3Player.java:23:	Private field 'SONG_FINISHED' could be made final; it is only initialized in the declaration or constructor.
+src/util/Mp3Player.java:25:	Parameter 'controller' is not assigned and could be declared final
+src/util/Mp3Player.java:35:	Parameter 'controller' is not assigned and could be declared final
+src/util/Mp3Player.java:47:	Parameter 'songPath' is not assigned and could be declared final
+src/util/Mp3Player.java:98:	Parameter 'arg0' is not assigned and could be declared final
+src/util/Mp3Player.java:98:	Parameter 'arg1' is not assigned and could be declared final
+src/util/Mp3Player.java:107:	Parameter 'arg0' is not assigned and could be declared final
+src/util/Mp3Player.java:107:	Parameter 'arg1' is not assigned and could be declared final
+src/util/Mp3Player.java:107:	Parameter 'arg2' is not assigned and could be declared final
+src/util/Mp3Player.java:107:	Parameter 'arg3' is not assigned and could be declared final
+src/util/Mp3Player.java:116:	Parameter 'arg0' is not assigned and could be declared final
+src/util/Mp3Player.java:125:	Parameter 'event' is not assigned and could be declared final
+src/util/PositionSongThread.java:12:	Private field 'controller' could be made final; it is only initialized in the declaration or constructor.
+src/util/PositionSongThread.java:15:	Parameter 'controller' is not assigned and could be declared final
+src/util/PositionSongThread.java:61:	Parameter 'paused' is not assigned and could be declared final
+src/util/ProgressBarThread.java:12:	Private field 'progressSlider' could be made final; it is only initialized in the declaration or constructor.
+src/util/ProgressBarThread.java:13:	Private field 'southP' could be made final; it is only initialized in the declaration or constructor.
+src/util/ProgressBarThread.java:14:	Private field 'controller' could be made final; it is only initialized in the declaration or constructor.
+src/util/ProgressBarThread.java:15:	Private field 'timerCounter' could be made final; it is only initialized in the declaration or constructor.
+src/util/ProgressBarThread.java:21:	Parameter 'contr' is not assigned and could be declared final
+src/util/ProgressBarThread.java:21:	Parameter 'labelTimeCounter' is not assigned and could be declared final
+src/util/ProgressBarThread.java:21:	Parameter 'progressSlider' is not assigned and could be declared final
+src/util/ProgressBarThread.java:21:	Parameter 'southPanel' is not assigned and could be declared final
+src/util/ProgressBarThread.java:57:	Parameter 'value' is not assigned and could be declared final
+src/util/SongBuilder.java:17:	Parameter 'mp3Info' is not assigned and could be declared final
+src/util/SongBuilder.java:17:	Parameter 'path' is not assigned and could be declared final
+src/util/SongBuilder.java:18:	Local variable 'duration' could be declared final
+src/util/SongBuilder.java:19:	Local variable 'fileName' could be declared final
+src/util/SongBuilder.java:20:	Local variable 'artist' could be declared final
+src/util/SongBuilder.java:21:	Local variable 'title' could be declared final
+src/util/SongBuilder.java:22:	Local variable 'album' could be declared final
+src/util/SongBuilder.java:23:	Local variable 'genre' could be declared final
+src/view/CentrePanel.java:26:	Private field 'showSongJTable' could be made final; it is only initialized in the declaration or constructor.
+src/view/CentrePanel.java:27:	Private field 'centreTableModel' could be made final; it is only initialized in the declaration or constructor.
+src/view/CentrePanel.java:30:	Parameter 'controller' is not assigned and could be declared final
+src/view/CentrePanel.java:31:	Local variable 'scrollPaneShowSongs' could be declared final
+src/view/CentrePanel.java:40:	Local variable 'columnNameS' could be declared final
+src/view/CentrePanel.java:56:	Parameter 'e' is not assigned and could be declared final
+src/view/CentrePanel.java:58:	Local variable 'source' could be declared final
+src/view/CentrePanel.java:60:	Local variable 'column' could be declared final
+src/view/CentrePanel.java:70:	Parameter 'e' is not assigned and could be declared final
+src/view/CentrePanel.java:76:	Parameter 'e' is not assigned and could be declared final
+src/view/CentrePanel.java:77:	Local variable 'menu' could be declared final
+src/view/CentrePanel.java:82:	Parameter 'e' is not assigned and could be declared final
+src/view/CentrePanel.java:85:	Local variable 'source' could be declared final
+src/view/CentrePanel.java:87:	Local variable 'column' could be declared final
+src/view/CentrePanel.java:100:	Parameter 'index0' is not assigned and could be declared final
+src/view/CentrePanel.java:105:	Parameter 'playlist' is not assigned and could be declared final
+src/view/MainView.java:15:	Private field 'northPanel' could be made final; it is only initialized in the declaration or constructor.
+src/view/MainView.java:27:	Parameter 'controller' is not assigned and could be declared final
+src/view/MainView.java:54:	Parameter 'e' is not assigned and could be declared final
+src/view/NorthPanel.java:41:	Parameter 'controller' is not assigned and could be declared final
+src/view/NorthPanel.java:48:	Local variable 'choice' could be declared final
+src/view/NorthPanel.java:55:	Local variable 'menuBar' could be declared final
+src/view/NorthPanel.java:57:	Local variable 'menu' could be declared final
+src/view/NorthPanel.java:68:	Local variable 'menuCreaPlaylist' could be declared final
+src/view/NorthPanel.java:71:	Local variable 'menuCaricaPlaylist' could be declared final
+src/view/NorthPanel.java:74:	Local variable 'menuEsci' could be declared final
+src/view/NorthPanel.java:81:	Parameter 'e' is not assigned and could be declared final
+src/view/NorthPanel.java:90:	Parameter 'e' is not assigned and could be declared final
+src/view/NorthPanel.java:119:	Parameter 'e' is not assigned and could be declared final
+src/view/NorthPanel.java:123:	Local variable 'Filter' could be declared final
+src/view/NorthPanel.java:130:	Parameter 'file' is not assigned and could be declared final
+src/view/NorthPanel.java:141:	Local variable 'userChoice' could be declared final
+src/view/NorthPanel.java:149:	Local variable 'txtSearch' could be declared final
+src/view/RightClickCentreTable.java:29:	Parameter 'controller' is not assigned and could be declared final
+src/view/RightClickCentreTable.java:29:	Parameter 'song' is not assigned and could be declared final
+src/view/RightClickCentreTable.java:30:	Local variable 'p' could be declared final
+src/view/RightClickCentreTable.java:43:	Parameter 'e' is not assigned and could be declared final
+src/view/RightClickCentreTable.java:62:	Private field 'controller' could be made final; it is only initialized in the declaration or constructor.
+src/view/RightClickCentreTable.java:63:	Private field 'song' could be made final; it is only initialized in the declaration or constructor.
+src/view/RightClickCentreTable.java:65:	Parameter 'controller' is not assigned and could be declared final
+src/view/RightClickCentreTable.java:65:	Parameter 'indexOfPlaylist' is not assigned and could be declared final
+src/view/RightClickCentreTable.java:65:	Parameter 'song' is not assigned and could be declared final
+src/view/RightClickCentreTable.java:74:	Parameter 'e' is not assigned and could be declared final
+src/view/SouthPanel.java:29:	Private field 'buttonOpen' could be made final; it is only initialized in the declaration or constructor.
+src/view/SouthPanel.java:30:	Private field 'buttonPlay' could be made final; it is only initialized in the declaration or constructor.
+src/view/SouthPanel.java:31:	Private field 'buttonNext' could be made final; it is only initialized in the declaration or constructor.
+src/view/SouthPanel.java:32:	Private field 'buttonBack' could be made final; it is only initialized in the declaration or constructor.
+src/view/SouthPanel.java:33:	Private field 'labelFileReproducing' could be made final; it is only initialized in the declaration or constructor.
+src/view/SouthPanel.java:36:	Private field 'sEstPanel' could be made final; it is only initialized in the declaration or constructor.
+src/view/SouthPanel.java:37:	Private field 'controller' could be made final; it is only initialized in the declaration or constructor.
+src/view/SouthPanel.java:38:	Private field 'progressSlider' could be made final; it is only initialized in the declaration or constructor.
+src/view/SouthPanel.java:44:	Private field 'iconOpen' could be made final; it is only initialized in the declaration or constructor.
+src/view/SouthPanel.java:46:	Private field 'iconPlay' could be made final; it is only initialized in the declaration or constructor.
+src/view/SouthPanel.java:48:	Private field 'iconPause' could be made final; it is only initialized in the declaration or constructor.
+src/view/SouthPanel.java:50:	Private field 'iconNext' could be made final; it is only initialized in the declaration or constructor.
+src/view/SouthPanel.java:52:	Private field 'iconBack' could be made final; it is only initialized in the declaration or constructor.
+src/view/SouthPanel.java:57:	Parameter 'controller' is not assigned and could be declared final
+src/view/SouthPanel.java:62:	Local variable 'btnplay' could be declared final
+src/view/SouthPanel.java:63:	Local variable 'newimgPlay' could be declared final
+src/view/SouthPanel.java:66:	Local variable 'btnPauseScaled' could be declared final
+src/view/SouthPanel.java:67:	Local variable 'newimgPause' could be declared final
+src/view/SouthPanel.java:114:	Parameter 'event' is not assigned and could be declared final
+src/view/SouthPanel.java:116:	Local variable 'source' could be declared final
+src/view/SouthPanel.java:118:	Local variable 'button' could be declared final
+src/view/SouthPanel.java:123:	Local variable 'Filter' could be declared final
+src/view/SouthPanel.java:129:	Parameter 'file' is not assigned and could be declared final
+src/view/SouthPanel.java:140:	Local variable 'userChoice' could be declared final
+src/view/SouthPanel.java:196:	Parameter 'labelDuration' is not assigned and could be declared final
+src/view/SouthPanel.java:196:	Parameter 'secondsDuration' is not assigned and could be declared final
+src/view/WestPanel.java:34:	Private field 'westTableModel' could be made final; it is only initialized in the declaration or constructor.
+src/view/WestPanel.java:35:	Private field 'westMenuTable' could be made final; it is only initialized in the declaration or constructor.
+src/view/WestPanel.java:36:	Private field 'scrollPane' could be made final; it is only initialized in the declaration or constructor.
+src/view/WestPanel.java:39:	Private field 'controller' could be made final; it is only initialized in the declaration or constructor.
+src/view/WestPanel.java:40:	Private field 'popMenuPlaylist' could be made final; it is only initialized in the declaration or constructor.
+src/view/WestPanel.java:41:	Private field 'remove' could be made final; it is only initialized in the declaration or constructor.
+src/view/WestPanel.java:42:	Private field 'di' could be made final; it is only initialized in the declaration or constructor.
+src/view/WestPanel.java:45:	Private field 'column' could be made final; it is only initialized in the declaration or constructor.
+src/view/WestPanel.java:53:	Parameter 'controller' is not assigned and could be declared final
+src/view/WestPanel.java:91:	Parameter 'e' is not assigned and could be declared final
+src/view/WestPanel.java:105:	Parameter 'e' is not assigned and could be declared final
+src/view/WestPanel.java:109:	Local variable 'source' could be declared final
+src/view/WestPanel.java:112:	Local variable 'column' could be declared final
+
+Complex code: 0
+
+Concurrency issues: 0
+
+Testing issues: 0
+
+Android-specific issues: 0
+
+Minor issues: 11
+src/model/CentreTableModel.java:28:	It is a good practice to call super() in a constructor
+src/model/CentreTableModel.java:36:	It is a good practice to call super() in a constructor
+src/model/CentreTableModel.java:45:	It is a good practice to call super() in a constructor
+src/model/WestTableModel.java:19:	It is a good practice to call super() in a constructor
+src/util/PositionSongThread.java:15:	It is a good practice to call super() in a constructor
+src/util/ProgressBarThread.java:21:	It is a good practice to call super() in a constructor
+src/view/CentrePanel.java:30:	It is a good practice to call super() in a constructor
+src/view/NorthPanel.java:41:	It is a good practice to call super() in a constructor
+src/view/RightClickCentreTable.java:29:	It is a good practice to call super() in a constructor
+src/view/SouthPanel.java:57:	It is a good practice to call super() in a constructor
+src/view/WestPanel.java:53:	It is a good practice to call super() in a constructor
+
+Other errors: 0
+

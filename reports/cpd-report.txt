@@ -1,0 +1,30 @@
+Found a 7 line (59 tokens) duplication in the following files: 
+Starting at line 153 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-gjinaj-musicsort/src/model/MpegInfo.java
+Starting at line 251 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-gjinaj-musicsort/src/model/MpegInfo.java
+
+    private void loadInfo(final AudioFileFormat aff) throws UnsupportedAudioFileException {
+        final String type = aff.getType().toString();
+        if (!type.equalsIgnoreCase("mp3")) {
+            throw new UnsupportedAudioFileException("Not MP3 audio format");
+        }
+        if (aff instanceof TAudioFileFormat) {
+            final Map<String, Object> props = ((TAudioFileFormat) aff).properties();
+=====================================================================
+Found a 6 line (58 tokens) duplication in the following files: 
+Starting at line 58 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-gjinaj-musicsort/src/view/CentrePanel.java
+Starting at line 109 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-gjinaj-musicsort/src/view/WestPanel.java
+
+		            JTable source = (JTable)e.getSource();
+		            rowSelected = source.rowAtPoint( e.getPoint() );
+		            int column = source.columnAtPoint( e.getPoint() );
+		            
+		            if (! source.isRowSelected(rowSelected))
+		                source.changeSelection(rowSelected, column, false, false);
+=====================================================================
+Found a 3 line (55 tokens) duplication in the following files: 
+Starting at line 223 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-gjinaj-musicsort/src/controller/MainController.java
+Starting at line 239 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-gjinaj-musicsort/src/controller/MainController.java
+
+        if(libraryManager.getReproducingPlaylist().getId().equals(libraryManager.getShowPlaylist().getId())){
+            centrePanel.setTableSongSelected(this.getLibraryManager().reproducingSongPosInPlaylist()%this.getLibraryManager().getReproducingPlaylist().size());
+        }
